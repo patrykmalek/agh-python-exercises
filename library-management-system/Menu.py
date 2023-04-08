@@ -1,42 +1,16 @@
 from Option import Option, OptionMenu
+import os
 
 
 class Menu:
-    def __init__(self, menu_options, parent_menu=None):
+    def __init__(self, name, menu_options):
+        self.name = name
         self.options = menu_options
-        self.parent_menu = parent_menu
-        self.current_menu = menu_options
-        self.menu_history = []
-
-    def display_menu(self):
-        print("##############################")
-        for index, option in enumerate(self.current_menu):
-            print(f"{index + 1}. {option}")
-        if self.parent_menu is not None:
-            print(f"0. Back")
-        print("q. Exit")
-        print("##############################")
-
-    def get_input(self):
-        selected_option = input("Select an option: ")
-        return selected_option
-
-    def validate_input(self, choice):
-        if choice.lower() == 'q':
-            print("Wyjście z programu...")
-            exit()
-
-        if not choice.isdigit():
-            print("Niepoprawna opcja...")
-            return False
-
-        if self.parent_menu is None and int(choice) == 0:
-            print("Niepoprawna opcja...")
-            return False
-
-        return True
+        self.parent_menu = None
+        self.clear_view()
 
     def execute_menu(self):
+        self.clear_view()
         while True:
             self.display_menu()
 
@@ -45,31 +19,55 @@ class Menu:
             if not self.validate_input(choice):
                 continue
 
-            choice = int(choice)
-            if choice in range(0, len(self.options) + 1):
-                selected_option = self.options[choice - 1]
+            if self.parent_menu is not None and int(choice) == 0:
+                self.parent_menu.execute_menu()
 
-                print(f"Wybrano opcję: {selected_option}")
-                return selected_option
+            self.clear_view()
+            choice = int(choice) - 1
+            if choice in range(0, len(self.options)):
+                selected_option = self.options[choice]
+                if isinstance(selected_option, OptionMenu):
+                    selected_option.submenu.set_parent_menu(self)
+                    selected_option.submenu.execute_menu()
+                elif isinstance(selected_option, Option):
+                    selected_option.action()
             else:
                 print("Coś poszło nie tak...")
 
+    def display_menu(self):
+        print(f"\n--------- {self.name} ---------")
+        print("#############################")
+        for index, option in enumerate(self.options):
+            print(f"{index + 1}. {option}")
+        if self.parent_menu is not None:
+            print(f"0. Back")
+        print("q. Exit")
+        print("#############################")
 
-# testowe uzycie funkcji
+    def set_parent_menu(self, parent_menu):
+        self.parent_menu = parent_menu
 
-def function1():
-    print("You chose function 1.")
+    def get_input(self):
+        selected_option = input("Select an option: ")
+        return selected_option
 
+    def validate_input(self, choice):
+        if choice.lower() == 'q':
+            self.clear_view()
+            print("Wyjście z programu...")
+            exit()
 
-def function2():
-    print("You chose function 2.")
+        if not choice.isdigit():
+            self.clear_view()
+            print("Niepoprawna opcja...")
+            return False
 
+        if self.parent_menu is None and int(choice) == 0:
+            self.clear_view()
+            print("Niepoprawna opcja...")
+            return False
 
-main_options = [
-    Option("Function 1", function1),
-    Option("Function 2", function2),
-]
+        return True
 
-menu = Menu(main_options)
-
-menu.execute_menu()
+    def clear_view(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
