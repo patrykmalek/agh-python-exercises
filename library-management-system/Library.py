@@ -1,9 +1,11 @@
 from Book import Book
+import json
+import os
 
 
 class Library:
 
-    def __init__(self, books_file="books.csv", readers_file="readers.csv"):
+    def __init__(self, books_file="books.json", readers_file="readers.json"):
         self.books = []
         self.borrowed_books = []
         self.reserved_book = []
@@ -21,6 +23,7 @@ class Library:
             print("      Brak danych...      ")
         for index, book in enumerate(self.books):
             print(f'{index + 1}.  "{book.title}" - \033[3m{book.author}\033[0m')
+
     def search_book(self):
         print("Searching book...")
 
@@ -31,6 +34,7 @@ class Library:
 
         book = Book(title, author)
         self.books.append(book)
+        self.save_books()
         print(f"Dodano książkę: {book}")
 
     def remove_book(self):
@@ -52,8 +56,19 @@ class Library:
         print("Removing reader...")
 
     def load_books(self):
-        # TODO: Add loading data from CSV or JSON file.
-        pass
+        if not os.path.getsize(self.books_file) == 0:
+            with open(self.books_file, 'r') as f:
+                books_dict_list = json.load(f)
+            for book_dict in books_dict_list:
+                self.books.append(Book.from_dict(book_dict))
+
+    def save_books(self):
+        books_dict_list = []
+        for book in self.books:
+            books_dict_list.append(book.to_dict())
+
+        with open(self.books_file, 'w') as f:
+            json.dump(books_dict_list, f)
 
     def load_readers(self):
         # TODO: Add loading data from CSV or JSON file.

@@ -5,3 +5,10 @@ class Book:
         self.author = author
         self.is_borrowed = False
         self.borrowed_by = None
+
+    def to_dict(self):
+        return {'title': self.title, 'author': self.author}
+
+    @staticmethod
+    def from_dict(book_dict):
+        return Book(book_dict['title'], book_dict['author'])
