@@ -26,7 +26,7 @@ class Library:
         if len(self.books) == 0:
             print("      Brak danych...      ")
         for index, book in enumerate(self.books):
-            print(f'{index + 1}.  "{book.title}" - \033[3m{book.author}\033[0m')
+            print(f'{index + 1}.  {book}')
 
     def search_book(self):
         print("Searching book...")

@@ -12,3 +12,6 @@ class Book:
     @staticmethod
     def from_dict(book_dict):
         return Book(book_dict['title'], book_dict['author'])
+
+    def __str__(self):
+        return f'"{self.title}" - \033[3m{self.author}\033[0m'
