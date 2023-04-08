@@ -1,17 +1,16 @@
 class Option:
-    def __init__(self, name, function):
+    def __init__(self, name, action):
         self.name = name
-        self.function = function
+        self.action = action
 
     def __repr__(self):
         return self.name
 
 
 class OptionMenu(Option):
-    def __init__(self, name, function, submenu=None, parent_menu=None):
+    def __init__(self, name, function, submenu=None):
         super().__init__(name, function)
         self.submenu = submenu
-        self.parent_menu = parent_menu
 
     def __repr__(self):
         return self.name
