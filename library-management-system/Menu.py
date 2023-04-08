@@ -40,15 +40,15 @@ class Menu:
         for index, option in enumerate(self.options):
             print(f"{index + 1}. {option}")
         if self.parent_menu is not None:
-            print(f"0. Back")
-        print("q. Exit")
+            print(f"0. Cofnij")
+        print("q. Wyjdź")
         print("#############################")
 
     def set_parent_menu(self, parent_menu):
         self.parent_menu = parent_menu
 
     def get_input(self):
-        selected_option = input("Select an option: ")
+        selected_option = input("Wybierz opcję z menu: ")
         return selected_option
 
     def validate_input(self, choice):
