@@ -1,11 +1,15 @@
 from Book import Book
 import json
 import os
+from pathlib import Path
 
 
 class Library:
 
-    def __init__(self, books_file="books.json", readers_file="readers.json"):
+    DEFAULT_BOOKS_FILE_PATH = Path('data', 'books.json')
+    DEFAULT_READERS_FILE_PATH = Path('data', 'readers.json')
+
+    def __init__(self, books_file=DEFAULT_BOOKS_FILE_PATH, readers_file=DEFAULT_READERS_FILE_PATH):
         self.books = []
         self.borrowed_books = []
         self.reserved_book = []
