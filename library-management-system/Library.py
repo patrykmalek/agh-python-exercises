@@ -70,20 +70,21 @@ class Library:
         family_name = input("Podaj nazwisko:")
         library_card_number = self.generate_library_card_number()
 
-        print('\nGenerowanie numeru karty... ')
+        print('Generowanie numeru karty... ')
         time.sleep(1)
-        print(f'\nWygenerowany numer karty: {library_card_number}')
+        print(f'Wygenerowany numer karty: {library_card_number}')
         reader = Reader(first_name, family_name, library_card_number)
         self.readers.append(reader)
-        print(f"\nDodano czytelnika: \n{reader}\n")
+        self.save_readers()
+        print(f"Dodano czytelnika: \n{reader}\n")
 
     def remove_reader(self):
         print("Removing reader...")
 
     def load_books(self):
         if not os.path.getsize(self.books_file) == 0:
-            with open(self.books_file, 'r') as f:
-                books_dict_list = json.load(f)
+            with open(self.books_file, 'r') as file:
+                books_dict_list = json.load(file)
             for book_dict in books_dict_list:
                 self.books.append(Book.from_dict(book_dict))
 
@@ -91,13 +92,19 @@ class Library:
         books_dict_list = []
         for book in self.books:
             books_dict_list.append(book.to_dict())
-
-        with open(self.books_file, 'w') as f:
-            json.dump(books_dict_list, f)
+        with open(self.books_file, 'w') as file:
+            json.dump(books_dict_list, file)
 
     def load_readers(self):
         # TODO: Add loading data from CSV or JSON file.
         pass
+
+    def save_readers(self):
+        readers_dict_list = []
+        for reader in self.readers:
+            readers_dict_list.append(reader.to_dict())
+        with open(self.readers_file, 'w') as file:
+            json.dump(readers_dict_list, file)
 
     # FIXME: I have no better idea for it but I use it in a few places
     def create_menu_for_objects(self, objects_list, menu_name, prompt_msg):
