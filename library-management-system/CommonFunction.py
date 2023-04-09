@@ -1,3 +1,6 @@
+import os
+
+
 class CommonFunction:
     @staticmethod
     def create_bordered_string(text, length=60, fill_char='-'):
@@ -8,3 +11,7 @@ class CommonFunction:
         remaining_length = remaining_length - len(left_fill)
         right_fill = fill_char * remaining_length
         return f"{left_fill}{text}{right_fill}"
+
+    @staticmethod
+    def clear_view():
+        os.system('cls' if os.name == 'nt' else 'clear')

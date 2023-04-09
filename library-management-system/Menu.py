@@ -1,6 +1,5 @@
 from Option import Option, OptionMenu
 from CommonFunction import CommonFunction
-import os
 
 
 class Menu:
@@ -10,10 +9,9 @@ class Menu:
         self.parent_menu = None
         self.library_management_system = None
         self.custom_input_msg = custom_input_msg
-        self.clear_view()
 
     def execute_menu(self):
-        self.clear_view()
+        CommonFunction.clear_view()
         self.library_management_system.current_menu = self
         while True:
             self.display_menu()
@@ -26,7 +24,7 @@ class Menu:
             if self.parent_menu is not None and int(choice) == 0:
                 self.parent_menu.execute_menu()
 
-            self.clear_view()
+            CommonFunction.clear_view()
             choice = int(choice) - 1
             if choice in range(0, len(self.options)):
                 selected_option = self.options[choice]
@@ -80,21 +78,18 @@ class Menu:
 
     def validate_input(self, choice):
         if choice.lower() == 'q':
-            self.clear_view()
+            CommonFunction.clear_view()
             print("Wyjście z programu...")
             exit()
 
         if not choice.isdigit():
-            self.clear_view()
+            CommonFunction.clear_view()
             print("Niepoprawna opcja...")
             return False
 
         if self.parent_menu is None and int(choice) == 0:
-            self.clear_view()
+            CommonFunction.clear_view()
             print("Niepoprawna opcja...")
             return False
 
         return True
-
-    def clear_view(self):
-        os.system('cls' if os.name == 'nt' else 'clear')
