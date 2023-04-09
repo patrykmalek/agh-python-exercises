@@ -51,7 +51,10 @@ class Library:
             print(f'{index + 1}.  {book}')
 
     def search_book(self):
-        print("Searching book...")
+        book_menu = self.create_menu_for_objects(self.books, MenuNames.SEARCH_BOOK.value, "Wyszukaj:")
+        selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
+        CommonFunction.clear_view()
+        print(f"\n{selected_book}")
 
     def add_book(self):
         print(CommonFunction.create_bordered_string(MenuNames.ADD_BOOK.value))
