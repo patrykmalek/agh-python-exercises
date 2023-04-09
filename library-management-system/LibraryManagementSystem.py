@@ -3,6 +3,7 @@ from Option import Option, OptionMenu
 from Library import Library
 from LibraryEnums import MenuNames, Messages
 from CommonFunction import CommonFunction
+from LoginProvider import LoginProvider
 import time
 
 
@@ -11,6 +12,7 @@ class LibraryManagementSystem:
     def __init__(self):
         self.library = Library()
         self.current_menu = None
+        self.login_provider = LoginProvider()
 
     def run(self):
         books_management_by_librarian = Menu(MenuNames.BOOKS_MANAGEMENT.value, [

@@ -12,15 +12,13 @@ import time
 
 class Library:
     DEFAULT_BOOKS_FILE_PATH = Path('data', 'books.json')
-    DEFAULT_READERS_FILE_PATH = Path('data', 'readers.json')
 
-    def __init__(self, books_file=DEFAULT_BOOKS_FILE_PATH, readers_file=DEFAULT_READERS_FILE_PATH):
+    def __init__(self, books_file=DEFAULT_BOOKS_FILE_PATH):
         self.books = []
         self.borrowed_books = []
         self.reserved_books = []
         self.readers = []
         self.books_file = books_file
-        self.readers_file = readers_file
         self.library_management_system = None
 
         # Load library state from JSON file
@@ -108,11 +106,7 @@ class Library:
             json.dump(books_dict_list, file)
 
     def load_readers(self):
-        if not os.path.getsize(self.readers_file) == 0:
-            with open(self.readers_file, 'r') as file:
-                readers_dict_list = json.load(file)
-            for reader_dict in readers_dict_list:
-                self.readers.append(Reader.from_dict(reader_dict))
+        self.readers = self.library_management_system.login_provider.get_readers()
 
     def save_readers(self):
         readers_dict_list = []
