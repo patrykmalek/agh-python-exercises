@@ -6,6 +6,13 @@ class Book:
         self.is_borrowed = False
         self.borrowed_by = None
 
+    def borrow(self, reader):
+        if not self.is_borrowed:
+            self.borrowed_by = reader
+            self.is_borrowed = True
+            return True
+        return False
+
     def to_dict(self):
         return {'title': self.title, 'author': self.author}
 
