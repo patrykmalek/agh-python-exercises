@@ -11,7 +11,10 @@ class MenuNames(Enum):
     RESERVED_BOOKS = "Zarezerwowane książki"
     ADD_BOOK = "Dodawanie książki"
     REMOVE_BOOK = "Usuwanie książki"
+    SEARCH_BOOK = "Wyszukiwanie książki"
     ADD_READER = "Dodawanie czytelnika"
+    BACK = "Cofnij"
+    EXIT = "Wyjdź"
 
 
 class Messages(Enum):
@@ -30,3 +33,6 @@ class Messages(Enum):
     LOGIN_FAILED = "Nieprawidłowy login lub hasło"
     LOGIN_ALREADY_EXIST = "Użytkownik o podanym loginie już istnieje"
     NO_DATA = "Brak danych"
+    DEFAULT_INPUT_MESSAGE = "Wybierz opcję z menu: "
+    WRONG_CHOICE = "Wybrana pozycja nie istnieje. Wybierz ponownie."
+    EXIT_MESSAGE = "Dziękujemy za skorzystanie z systemu biblioteki. Do zobaczenia!"
