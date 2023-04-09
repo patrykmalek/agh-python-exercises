@@ -44,7 +44,6 @@ class Menu:
 
         while True:
             CommonFunction.clear_view()
-            print(len(filtered_options))
             self.display_menu(filtered_options)
             choice_or_query = self.get_input()
 

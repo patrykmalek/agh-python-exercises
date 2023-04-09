@@ -34,5 +34,5 @@ class Messages(Enum):
     LOGIN_ALREADY_EXIST = "Użytkownik o podanym loginie już istnieje"
     NO_DATA = "Brak danych"
     DEFAULT_INPUT_MESSAGE = "Wybierz opcję z menu: "
-    WRONG_CHOICE = "Wybrana pozycja nie istnieje. Wybierz ponownie."
+    WRONG_CHOICE = "Wybrana pozycja nie istnieje. Wybierz ponownie. \n"
     EXIT_MESSAGE = "Dziękujemy za skorzystanie z systemu biblioteki. Do zobaczenia!"
