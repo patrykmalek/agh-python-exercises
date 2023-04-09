@@ -76,7 +76,7 @@ class Library:
         reader = Reader(first_name, family_name, library_card_number)
         self.readers.append(reader)
         self.save_readers()
-        print(f"Dodano czytelnika: \n{reader}\n")
+        print(f"Dodano czytelnika: \n{reader}")
 
     def remove_reader(self):
         print("Removing reader...")
@@ -96,8 +96,11 @@ class Library:
             json.dump(books_dict_list, file)
 
     def load_readers(self):
-        # TODO: Add loading data from CSV or JSON file.
-        pass
+        if not os.path.getsize(self.readers_file) == 0:
+            with open(self.readers_file, 'r') as file:
+                readers_dict_list = json.load(file)
+            for reader_dict in readers_dict_list:
+                self.readers.append(Reader.from_dict(reader_dict))
 
     def save_readers(self):
         readers_dict_list = []

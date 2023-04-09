@@ -1,0 +1,22 @@
+[
+  {
+    "first_name": "Patryk",
+    "family_name": "Ma\u0142ek",
+    "library_card_number": "LIB-0001"
+  },
+  {
+    "first_name": "Jan",
+    "family_name": "Kowalski",
+    "library_card_number": "LIB-0002"
+  },
+  {
+    "first_name": "Piotr",
+    "family_name": "Nowak",
+    "library_card_number": "LIB-0003"
+  },
+  {
+    "first_name": "Kamil",
+    "family_name": "Lawendowski",
+    "library_card_number": "LIB-0004"
+  }
+]
