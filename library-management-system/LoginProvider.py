@@ -12,6 +12,8 @@ class LoginProvider:
         self.users_file = users_file
         self.users = {}
 
+        self.load_users()
+
     def load_users(self):
         if not os.path.getsize(self.users_file) == 0:
             with open(self.users_file, 'r') as f:
@@ -33,3 +35,15 @@ class LoginProvider:
             elif user_data['role'] == 'librarian':
                 return Librarian.from_dict(user_data)
         return None
+
+    def get_readers(self):
+        readers_list = []
+        for user_data in self.users:
+            if user_data['role'] == 'reader':
+                readers_list.append(Reader.from_dict(user_data))
+
+    def get_librarians(self):
+        librarians_list = []
+        for user_data in self.users:
+            if user_data['role'] == 'librarian':
+                librarians_list.append(Librarian.from_dict(user_data))
