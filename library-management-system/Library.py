@@ -1,9 +1,11 @@
 from Book import Book
 from Menu import Menu
 from Option import Option
+from Reader import Reader
+from pathlib import Path
 import json
 import os
-from pathlib import Path
+import time
 
 
 class Library:
@@ -19,7 +21,7 @@ class Library:
         self.readers_file = readers_file
         self.library_management_system = None
 
-        # Load library state from CSV files or json?
+        # Load library state from JSON file
         self.load_books()
         self.load_readers()
 
@@ -63,7 +65,17 @@ class Library:
         print("Searching reader...")
 
     def add_reader(self):
-        print("Adding reader...")
+        print(f"\n--------- Dodawanie czytelnika ---------")
+        first_name = input("Podaj imię:")
+        family_name = input("Podaj nazwisko:")
+        library_card_number = self.generate_library_card_number()
+
+        print('\nGenerowanie numeru karty... ')
+        time.sleep(1)
+        print(f'\nWygenerowany numer karty: {library_card_number}')
+        reader = Reader(first_name, family_name, library_card_number)
+        self.readers.append(reader)
+        print(f"\nDodano czytelnika: \n{reader}\n")
 
     def remove_reader(self):
         print("Removing reader...")
@@ -97,3 +109,8 @@ class Library:
         book_menu.library_management_system = self.library_management_system
         book_menu.parent_menu = self.library_management_system.current_menu
         return book_menu
+
+    def generate_library_card_number(self):
+        next_reader_number = len(self.readers) + 1
+        next_card_number = str(next_reader_number).zfill(4)
+        return f"LIB-{next_card_number}"
