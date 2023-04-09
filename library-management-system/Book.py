@@ -5,11 +5,20 @@ class Book:
         self.author = author
         self.is_borrowed = False
         self.borrowed_by = None
+        self.is_reserved = False
+        self.reserved_by = None
 
     def borrow(self, reader):
         if not self.is_borrowed:
             self.borrowed_by = reader
             self.is_borrowed = True
+            return True
+        return False
+
+    def reserve(self, reader):
+        if not self.is_reserved:
+            self.reserved_by = reader
+            self.is_reserved = True
             return True
         return False
 
