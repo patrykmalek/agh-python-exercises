@@ -12,6 +12,8 @@ class LibraryManagementSystem:
     def run(self):
         books_management_by_librarian = Menu("Zarządzanie książkami", [
             Option("Wyświetl książki", self.library.display_books),
+            Option("Wyświetl wypożyczone książki", self.library.display_borrowed_books),
+            Option("Wyświetl zarezerwowane książki", self.library.display_reserved_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Dodaj książkę", self.library.add_book),
             Option("Usuń książkę", self.library.remove_book)
@@ -20,7 +22,6 @@ class LibraryManagementSystem:
         readers_management_by_librarian = Menu("Zarządzanie czytelnikami", [
             Option("Wyszukaj czytelnika", self.library.search_reader),
             Option("Dodaj czytelnika", self.library.add_reader),
-            Option("Usuń czytelnika", self.library.remove_reader)
         ])
 
         librarian_main_menu = Menu("Główne menu", [

@@ -15,7 +15,7 @@ class Library:
     def __init__(self, books_file=DEFAULT_BOOKS_FILE_PATH, readers_file=DEFAULT_READERS_FILE_PATH):
         self.books = []
         self.borrowed_books = []
-        self.reserved_book = []
+        self.reserved_books = []
         self.readers = []
         self.books_file = books_file
         self.readers_file = readers_file
@@ -26,10 +26,24 @@ class Library:
         self.load_readers()
 
     def display_books(self):
-        print(f"\n--------- Wyświetlanie książek ---------")
+        print(f"\n--------- Wszystkie książki ---------")
         if len(self.books) == 0:
-            print("      Brak danych...      ")
+            print("              Brak danych              ")
         for index, book in enumerate(self.books):
+            print(f'{index + 1}.  {book}')
+
+    def display_borrowed_books(self):
+        print(f"\n--------- Wypożyczone książki ---------")
+        if len(self.borrowed_books) == 0:
+            print("              Brak danych              ")
+        for index, book in enumerate(self.borrowed_books):
+            print(f'{index + 1}.  {book}')
+
+    def display_reserved_books(self):
+        print(f"\n--------- Zarezerwowane książki ---------")
+        if len(self.reserved_books) == 0:
+            print("              Brak danych              ")
+        for index, book in enumerate(self.reserved_books):
             print(f'{index + 1}.  {book}')
 
     def search_book(self):
@@ -77,9 +91,6 @@ class Library:
         self.readers.append(reader)
         self.save_readers()
         print(f"Dodano czytelnika: \n{reader}")
-
-    def remove_reader(self):
-        print("Removing reader...")
 
     def load_books(self):
         if not os.path.getsize(self.books_file) == 0:
