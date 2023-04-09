@@ -10,9 +10,9 @@ import time
 class LibraryManagementSystem:
 
     def __init__(self):
-        self.library = Library()
-        self.current_menu = None
         self.login_provider = LoginProvider()
+        self.library = Library(self.login_provider)
+        self.current_menu = None
 
     def run(self):
         books_management_by_librarian = Menu(MenuNames.BOOKS_MANAGEMENT.value, [

@@ -27,4 +27,6 @@ class Messages(Enum):
     READER_NOT_FOUND_BY_CARD = "Nie znaleziono czytelnika o podanym numerze karty"
     BORROW_SUCCESSFUL = "Książka została wypożyczona"
     RETURN_SUCCESSFUL = "Książka została zwrócona"
+    LOGIN_FAILED = "Nieprawidłowy login lub hasło"
+    LOGIN_ALREADY_EXIST = "Użytkownik o podanym loginie już istnieje"
     NO_DATA = "Brak danych"

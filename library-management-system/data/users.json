@@ -1,0 +1,22 @@
+[
+  {
+    "login": "pmalek",
+    "password": "123",
+    "first_name": "Patryk",
+    "family_name": "Ma\u0142ek",
+    "role": "reader",
+    "library_card_number": "LIB-0001",
+    "borrowed_books": [],
+    "reserved_books": []
+  },
+  {
+    "login": "pmalek1",
+    "password": "321",
+    "first_name": "Patryk",
+    "family_name": "Ma\u0142ek",
+    "role": "reader",
+    "library_card_number": "LIB-0002",
+    "borrowed_books": [],
+    "reserved_books": []
+  }
+]

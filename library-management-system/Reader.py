@@ -2,11 +2,12 @@ from User import User
 
 
 class Reader(User):
-    def __init__(self, login, password, first_name, family_name, library_card_number):
+    def __init__(self, login, password, first_name, family_name,
+                 library_card_number, borrowed_books=[], reserved_books=[]):
         super().__init__(login, password, first_name, family_name, 'reader')
         self.library_card_number = library_card_number
-        self.borrowed_books = []
-        self.reserved_books = []
+        self.borrowed_books = borrowed_books
+        self.reserved_books = reserved_books
 
     def to_dict(self):
         reader_dict = super().to_dict()
