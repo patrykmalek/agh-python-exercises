@@ -3,10 +3,11 @@ import os
 
 
 class Menu:
-    def __init__(self, name, menu_options):
+    def __init__(self, name, menu_options, custom_input_msg=None):
         self.name = name
         self.options = menu_options
         self.parent_menu = None
+        self.custom_input_msg = custom_input_msg
         self.clear_view()
 
     def execute_menu(self):
@@ -34,6 +35,26 @@ class Menu:
             else:
                 print("Coś poszło nie tak...")
 
+    def execute_menu_and_get_object(self):
+        while True:
+            self.display_menu()
+
+            choice = self.get_input()
+
+            if not self.validate_input(choice):
+                continue
+
+            if self.parent_menu is not None and int(choice) == 0:
+                continue
+
+            choice = int(choice) - 1
+            if choice in range(0, len(self.options)):
+                selected_option = self.options[choice]
+                if isinstance(selected_option, Option):
+                    return selected_option.obj_instance
+            else:
+                print("Coś poszło nie tak...")
+
     def display_menu(self):
         print(f"\n--------- {self.name} ---------")
         print("#############################")
@@ -48,7 +69,8 @@ class Menu:
         self.parent_menu = parent_menu
 
     def get_input(self):
-        selected_option = input("Wybierz opcję z menu: ")
+        input_msg = self.custom_input_msg if self.custom_input_msg is not None else "Wybierz opcję z menu: "
+        selected_option = input(input_msg)
         return selected_option
 
     def validate_input(self, choice):
