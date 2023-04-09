@@ -1,5 +1,6 @@
 from CommonFunction import CommonFunction
 from LibraryEnums import MenuNames, Messages
+from SearchFilter import SearchFilter
 from Book import Book
 from Menu import Menu
 from Option import Option
@@ -26,11 +27,13 @@ class Library:
         self.load_books()
         self.load_readers()
 
-    def display_books(self):
+    def display_books(self, books_to_display=None):
         print(CommonFunction.create_bordered_string(MenuNames.ALL_BOOKS.value))
-        if len(self.books) == 0:
+        if books_to_display is None:
+            books_to_display = self.books
+        if len(books_to_display) == 0:
             print(f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
-        for index, book in enumerate(self.books):
+        for index, book in enumerate(books_to_display):
             print(f'{index + 1}.  {book}')
 
     def display_borrowed_books(self):
@@ -61,8 +64,8 @@ class Library:
         print(f"{Messages.BOOK_ADDED.value}:\n{book}")
 
     def remove_book(self):
-        book_menu = self.create_menu_for_objects(self.books, MenuNames.REMOVE_BOOK.value, "Wybierz książkę:")
-        selected_book = book_menu.execute_menu_and_get_object()
+        book_menu = self.create_menu_for_objects(self.books, MenuNames.REMOVE_BOOK.value, "Wybierz książkę lub wyszukaj:")
+        selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         if selected_book in self.books:
             self.books.remove(selected_book)
