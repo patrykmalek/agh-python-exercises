@@ -1,5 +1,6 @@
 from Option import Option, OptionMenu
 from CommonFunction import CommonFunction
+from LibraryEnums import MenuNames, Messages
 
 
 class Menu:
@@ -35,61 +36,75 @@ class Menu:
                 elif isinstance(selected_option, Option):
                     selected_option.action()
             else:
-                print("Coś poszło nie tak...")
+                print(Messages.WRONG_CHOICE.value)
 
-    def execute_menu_and_get_object(self):
+    def execute_menu_and_get_object(self, filter_func=None):
         self.library_management_system.current_menu = self
+        filtered_options = self.options
+
         while True:
-            self.display_menu()
+            CommonFunction.clear_view()
+            print(len(filtered_options))
+            self.display_menu(filtered_options)
+            choice_or_query = self.get_input()
 
-            choice = self.get_input()
-
-            if not self.validate_input(choice):
+            if not choice_or_query:
+                filtered_options = self.options
                 continue
 
-            if self.parent_menu is not None and int(choice) == 0:
-                self.parent_menu.execute_menu()
+            if not self.validate_input(choice_or_query, can_be_text=True):
+                continue
 
-            choice = int(choice) - 1
-            if choice in range(0, len(self.options)):
-                selected_option = self.options[choice]
-                if isinstance(selected_option, Option):
-                    return selected_option.obj_instance
-            else:
-                print("Coś poszło nie tak...")
+            if self.parent_menu and choice_or_query.isdigit():
+                if int(choice_or_query) == 0:
+                    self.parent_menu.execute_menu()
 
-    def display_menu(self):
+            if choice_or_query.isdigit():
+                choice = int(choice_or_query) - 1
+                if choice in range(0, len(filtered_options)):
+                    selected_option = filtered_options[choice]
+                    if isinstance(selected_option, Option):
+                        return selected_option.obj_instance
+
+            if filter_func and isinstance(choice_or_query, str):
+                query = choice_or_query.lower()
+                filtered_options = filter_func(filtered_options, query)
+
+    def display_menu(self, options=None):
         print(CommonFunction.create_bordered_string(self.name))
         print(CommonFunction.create_bordered_string("", fill_char="#"))
-        for index, option in enumerate(self.options):
+        options_to_display = options if options is not None else self.options
+        if len(options_to_display) == 0:
+            print(f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
+        for index, option in enumerate(options_to_display):
             print(f"{index + 1}. {option}")
-        if self.parent_menu is not None:
-            print(f"0. Cofnij")
-        print("q. Wyjdź")
+        if self.parent_menu:
+            print(f"0. {MenuNames.BACK.value}")
+        print(f"q. {MenuNames.EXIT.value}")
         print(CommonFunction.create_bordered_string("", fill_char="#"))
 
     def set_parent_menu(self, parent_menu):
         self.parent_menu = parent_menu
 
     def get_input(self):
-        input_msg = self.custom_input_msg if self.custom_input_msg is not None else "Wybierz opcję z menu: "
+        input_msg = self.custom_input_msg if self.custom_input_msg else Messages.DEFAULT_INPUT_MESSAGE.value
         selected_option = input(input_msg)
         return selected_option
 
-    def validate_input(self, choice):
+    def validate_input(self, choice, can_be_text=False):
         if choice.lower() == 'q':
             CommonFunction.clear_view()
-            print("Wyjście z programu...")
+            print(Messages.EXIT_MESSAGE.value)
             exit()
 
-        if not choice.isdigit():
+        if not choice.isdigit() and not can_be_text:
             CommonFunction.clear_view()
-            print("Niepoprawna opcja...")
+            print(Messages.WRONG_CHOICE.value)
             return False
 
-        if self.parent_menu is None and int(choice) == 0:
+        if not self.parent_menu and int(choice) == 0:
             CommonFunction.clear_view()
-            print("Niepoprawna opcja...")
+            print(Messages.WRONG_CHOICE.value)
             return False
 
         return True
