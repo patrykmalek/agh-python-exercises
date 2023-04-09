@@ -1,4 +1,5 @@
 from Option import Option, OptionMenu
+from CommonFunction import CommonFunction
 import os
 
 
@@ -60,14 +61,14 @@ class Menu:
                 print("Coś poszło nie tak...")
 
     def display_menu(self):
-        print(f"\n--------- {self.name} ---------")
-        print("#############################")
+        print(CommonFunction.create_bordered_string(self.name))
+        print(CommonFunction.create_bordered_string("", fill_char="#"))
         for index, option in enumerate(self.options):
             print(f"{index + 1}. {option}")
         if self.parent_menu is not None:
             print(f"0. Cofnij")
         print("q. Wyjdź")
-        print("#############################")
+        print(CommonFunction.create_bordered_string("", fill_char="#"))
 
     def set_parent_menu(self, parent_menu):
         self.parent_menu = parent_menu

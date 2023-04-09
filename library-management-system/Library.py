@@ -1,3 +1,4 @@
+from CommonFunction import CommonFunction
 from Book import Book
 from Menu import Menu
 from Option import Option
@@ -26,23 +27,23 @@ class Library:
         self.load_readers()
 
     def display_books(self):
-        print(f"\n--------- Wszystkie książki ---------")
+        print(CommonFunction.create_bordered_string("Wszystkie książki"))
         if len(self.books) == 0:
-            print("              Brak danych              ")
+            print(f'\n {CommonFunction.create_bordered_string("Brak danych", fill_char=" ")} \n')
         for index, book in enumerate(self.books):
             print(f'{index + 1}.  {book}')
 
     def display_borrowed_books(self):
-        print(f"\n--------- Wypożyczone książki ---------")
+        print(CommonFunction.create_bordered_string("Wypożyczone książki"))
         if len(self.borrowed_books) == 0:
-            print("              Brak danych              ")
+            print(f'\n {CommonFunction.create_bordered_string("Brak danych", fill_char=" ")} \n')
         for index, book in enumerate(self.borrowed_books):
             print(f'{index + 1}.  {book}')
 
     def display_reserved_books(self):
-        print(f"\n--------- Zarezerwowane książki ---------")
+        print(CommonFunction.create_bordered_string("Zarezerwowane książki"))
         if len(self.reserved_books) == 0:
-            print("              Brak danych              ")
+            print(f'\n {CommonFunction.create_bordered_string("Brak danych", fill_char=" ")} \n')
         for index, book in enumerate(self.reserved_books):
             print(f'{index + 1}.  {book}')
 
@@ -50,7 +51,7 @@ class Library:
         print("Searching book...")
 
     def add_book(self):
-        print(f"\n--------- Dodawanie książki ---------")
+        print(CommonFunction.create_bordered_string("Dodawanie książki"))
         title = input("Podaj tytuł:")
         author = input("Podaj autora:")
 
@@ -60,7 +61,7 @@ class Library:
         print(f"Dodano książkę: {book}")
 
     def remove_book(self):
-        print(f"\n--------- Usuwanie książki ---------")
+        print(CommonFunction.create_bordered_string("Usuwanie książki"))
         book_menu = self.create_menu_for_objects(self.books, "Usuwanie książek", "Wybierz książkę do usunięcia:")
         selected_book = book_menu.execute_menu_and_get_object()
         book_menu.clear_view()
@@ -79,7 +80,7 @@ class Library:
         print("Searching reader...")
 
     def add_reader(self):
-        print(f"\n--------- Dodawanie czytelnika ---------")
+        print(CommonFunction.create_bordered_string("Dodawanie czytelnika"))
         first_name = input("Podaj imię:")
         family_name = input("Podaj nazwisko:")
         library_card_number = self.generate_library_card_number()
