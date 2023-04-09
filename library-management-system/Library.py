@@ -1,11 +1,12 @@
 from Book import Book
+from Menu import Menu
+from Option import Option
 import json
 import os
 from pathlib import Path
 
 
 class Library:
-
     DEFAULT_BOOKS_FILE_PATH = Path('data', 'books.json')
     DEFAULT_READERS_FILE_PATH = Path('data', 'readers.json')
 
@@ -16,6 +17,7 @@ class Library:
         self.readers = []
         self.books_file = books_file
         self.readers_file = readers_file
+        self.library_management_system = None
 
         # Load library state from CSV files or json?
         self.load_books()
@@ -42,7 +44,14 @@ class Library:
         print(f"Dodano książkę: {book}")
 
     def remove_book(self):
-        print("Removing book...")
+        print(f"\n--------- Usuwanie książki ---------")
+        book_menu = self.create_menu_for_objects(self.books, "Usuwanie książek", "Wybierz książkę do usunięcia:")
+        selected_book = book_menu.execute_menu_and_get_object()
+        book_menu.clear_view()
+        if selected_book in self.books:
+            self.books.remove(selected_book)
+            self.save_books()
+        print(f"Usunięto książkę: {selected_book}")
 
     def borrow_book(self):
         print("Borrowing book...")
@@ -77,3 +86,14 @@ class Library:
     def load_readers(self):
         # TODO: Add loading data from CSV or JSON file.
         pass
+
+    # FIXME: I have no better idea for it but I use it in a few places
+    def create_menu_for_objects(self, objects_list, menu_name, prompt_msg):
+        options = []
+        for obj in objects_list:
+            options.append(Option(obj.__str__(), None, obj))
+        book_menu = Menu(menu_name, options, prompt_msg)
+        book_menu.library = self
+        book_menu.library_management_system = self.library_management_system
+        book_menu.parent_menu = self.library_management_system.current_menu
+        return book_menu

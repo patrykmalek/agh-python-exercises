@@ -7,11 +7,13 @@ class Menu:
         self.name = name
         self.options = menu_options
         self.parent_menu = None
+        self.library_management_system = None
         self.custom_input_msg = custom_input_msg
         self.clear_view()
 
     def execute_menu(self):
         self.clear_view()
+        self.library_management_system.current_menu = self
         while True:
             self.display_menu()
 
@@ -29,6 +31,7 @@ class Menu:
                 selected_option = self.options[choice]
                 if isinstance(selected_option, OptionMenu):
                     selected_option.submenu.set_parent_menu(self)
+                    selected_option.submenu.library_management_system = self.library_management_system
                     selected_option.submenu.execute_menu()
                 elif isinstance(selected_option, Option):
                     selected_option.action()
@@ -36,6 +39,7 @@ class Menu:
                 print("Coś poszło nie tak...")
 
     def execute_menu_and_get_object(self):
+        self.library_management_system.current_menu = self
         while True:
             self.display_menu()
 
@@ -45,7 +49,7 @@ class Menu:
                 continue
 
             if self.parent_menu is not None and int(choice) == 0:
-                continue
+                self.parent_menu.execute_menu()
 
             choice = int(choice) - 1
             if choice in range(0, len(self.options)):
