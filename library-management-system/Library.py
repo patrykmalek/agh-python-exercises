@@ -16,8 +16,11 @@ class Library:
 
     def __init__(self, login_provider, books_file=DEFAULT_BOOKS_FILE_PATH):
         self.books = []
+        #TODO: to remove, i think
         self.borrowed_books = []
         self.reserved_books = []
+        #
+        
         self.readers = []
         self.login_provider = login_provider
         self.books_file = books_file
@@ -78,8 +81,13 @@ class Library:
     def borrow_book(self):
         print("Borrowing book...")
 
-    def return_book(self):
-        print("Returning book...")
+    def accept_return_book(self):
+        awaiting_to_return_books = self.get_awaiting_to_return_books()
+        book_menu = self.create_menu_for_objects(awaiting_to_return_books, MenuNames.REMOVE_BOOK.value, "Wybierz książkę lub wyszukaj:")
+        selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
+        CommonFunction.clear_view()
+        #TODO: find book in self.books, change some values and save in self.books
+
 
     def display_readers(self):
         print(CommonFunction.create_bordered_string(
@@ -102,6 +110,21 @@ class Library:
         reader = self.login_provider.register_reader(library_card_number)
         self.readers.append(reader)
         print(f"\n{Messages.READER_ADDED.value}:\n{reader}\n")
+
+    def get_reserved_books(self):
+        reserved_books = []
+        reserved_books = SearchFilter.filter_reserved_books(self.books)
+        return reserved_books
+
+    def get_borrowed_books(self):
+        borrowed_books = []
+        borrowed_books = SearchFilter.filter_borrowed_books(self.books)
+        return borrowed_books
+
+    def get_awaiting_to_return_books(self):
+        awaiting_to_return_books = []
+        awaiting_to_return_books = SearchFilter.filter_awaiting_to_return_books(self.books)
+        return awaiting_to_return_books
 
     def load_books(self):
         if not os.path.getsize(self.books_file) == 0:

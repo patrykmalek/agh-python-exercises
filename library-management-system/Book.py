@@ -7,6 +7,7 @@ class Book:
         self.borrowed_by = None
         self.is_reserved = False
         self.reserved_by = None
+        self.to_return = False
 
     def borrow(self, reader):
         if not self.is_borrowed:
