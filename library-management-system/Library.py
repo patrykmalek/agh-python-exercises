@@ -81,6 +81,15 @@ class Library:
     def return_book(self):
         print("Returning book...")
 
+    def display_readers(self):
+        print(CommonFunction.create_bordered_string(
+            MenuNames.ALL_READERS.value))
+        if len(self.readers) == 0:
+            print(
+                f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
+        for index, reader in enumerate(self.readers):
+            print(f'{index + 1}.  {reader.to_string()}')
+
     def search_reader(self):
         print("Searching reader...")
 

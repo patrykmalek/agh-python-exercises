@@ -12,6 +12,7 @@ class MenuNames(Enum):
     ADD_BOOK = "Dodawanie książki"
     REMOVE_BOOK = "Usuwanie książki"
     SEARCH_BOOK = "Wyszukiwanie książki"
+    ALL_READERS = "Czytelnicy"
     ADD_READER = "Dodawanie czytelnika"
     BACK = "Cofnij"
     EXIT = "Wyjdź"

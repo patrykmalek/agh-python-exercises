@@ -31,3 +31,7 @@ class Reader(User):
     def __str__(self):
         return f"Imię i nazwisko: {self.first_name} {self.family_name}" \
                f"\nNumer karty bibliotecznej: {self.library_card_number}"
+
+    def to_string(self):
+        return f"{self.library_card_number} - {self.first_name} {self.family_name} ({self.login})"  \
+               f"\n    Książki:\n     -wypożyczone: {len(self.borrowed_books)}\n     -zarezerwowane: {len(self.reserved_books)}"

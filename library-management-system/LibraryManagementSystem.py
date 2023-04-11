@@ -17,22 +17,27 @@ class LibraryManagementSystem:
     def run(self):
         books_management_by_librarian = Menu(MenuNames.BOOKS_MANAGEMENT.value, [
             Option("Wyświetl książki", self.library.display_books),
-            Option("Wyświetl wypożyczone książki", self.library.display_borrowed_books),
-            Option("Wyświetl zarezerwowane książki", self.library.display_reserved_books),
+            Option("Wyświetl wypożyczone książki",
+                   self.library.display_borrowed_books),
+            Option("Wyświetl zarezerwowane książki",
+                   self.library.display_reserved_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Dodaj książkę", self.library.add_book),
             Option("Usuń książkę", self.library.remove_book)
         ])
 
         readers_management_by_librarian = Menu(MenuNames.READERS_MANAGEMENT.value, [
+            Option("Wyświetl czytelników", self.library.display_readers),
             Option("Wyszukaj czytelnika", self.library.search_reader),
             Option("Dodaj czytelnika", self.library.add_reader),
         ])
 
         librarian_main_menu = Menu(MenuNames.MAIN_MENU.value, [
             Option("Wypożycz książkę", self.library.borrow_book),
-            OptionMenu("Zarządzanie książkami", None, books_management_by_librarian),
-            OptionMenu("Zarządzanie czytelnikami", None, readers_management_by_librarian),
+            OptionMenu("Zarządzanie książkami", None,
+                       books_management_by_librarian),
+            OptionMenu("Zarządzanie czytelnikami", None,
+                       readers_management_by_librarian),
         ])
 
         self.current_menu = librarian_main_menu

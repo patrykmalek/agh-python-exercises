@@ -10,12 +10,22 @@
     "reserved_books": []
   },
   {
-    "login": "pmalek1",
+    "login": "pnowak",
     "password": "321",
-    "first_name": "Patryk",
-    "family_name": "Ma\u0142ek",
+    "first_name": "Piotr",
+    "family_name": "Nowak",
     "role": "reader",
     "library_card_number": "LIB-0002",
+    "borrowed_books": [],
+    "reserved_books": []
+  },
+  {
+    "login": "jkowalski",
+    "password": "123",
+    "first_name": "Jan",
+    "family_name": "Kowalski",
+    "role": "reader",
+    "library_card_number": "LIB-0003",
     "borrowed_books": [],
     "reserved_books": []
   }
