@@ -67,7 +67,7 @@ class Menu:
 
             if filter_func and isinstance(choice_or_query, str):
                 query = choice_or_query.lower()
-                filtered_options = filter_func(filtered_options, query)
+                filtered_options = filter_func(self.options, query)
 
     def display_menu(self, options=None):
         print(CommonFunction.create_bordered_string(self.name))
