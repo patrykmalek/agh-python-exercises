@@ -2,9 +2,9 @@ from User import User
 
 
 class Reader(User):
-    def __init__(self, login, password, first_name, family_name,
+    def __init__(self, user_id, login, password, first_name, family_name,
                  library_card_number, borrowed_books=[], reserved_books=[]):
-        super().__init__(login, password, first_name, family_name, 'reader')
+        super().__init__(user_id, login, password, first_name, family_name, 'reader')
         self.library_card_number = library_card_number
         self.borrowed_books = borrowed_books
         self.reserved_books = reserved_books
@@ -18,15 +18,23 @@ class Reader(User):
         })
         return reader_dict
 
+    def to_dict_without_user_data(self):
+        dict_without_user_data = self.to_dict()
+        del dict_without_user_data['login']
+        del dict_without_user_data['password']
+        return dict_without_user_data
+
     @staticmethod
     def from_dict(reader_dict):
-        return Reader(reader_dict['login'],
-                      reader_dict['password'],
-                      reader_dict['first_name'],
-                      reader_dict['family_name'],
-                      reader_dict['library_card_number'],
-                      reader_dict['borrowed_books'],
-                      reader_dict['reserved_books'])
+        return Reader(
+            reader_dict['user_id'],
+            reader_dict['login'],
+            reader_dict['password'],
+            reader_dict['first_name'],
+            reader_dict['family_name'],
+            reader_dict['library_card_number'],
+            reader_dict['borrowed_books'],
+            reader_dict['reserved_books'])
 
     def __str__(self):
         return f"Imię i nazwisko: {self.first_name} {self.family_name}" \
@@ -34,4 +42,5 @@ class Reader(User):
 
     def to_string(self):
         return f"{self.library_card_number} - {self.first_name} {self.family_name} ({self.login})"  \
-               f"\n    Książki:\n     -wypożyczone: {len(self.borrowed_books)}\n     -zarezerwowane: {len(self.reserved_books)}"
+               f"\n    Książki:\n     -wypożyczone: {len(self.borrowed_books)}\n     " \
+               f"-zarezerwowane: {len(self.reserved_books)}"
