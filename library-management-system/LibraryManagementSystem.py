@@ -4,14 +4,16 @@ from Library import Library
 from LibraryEnums import MenuNames, Messages
 from CommonFunction import CommonFunction
 from LoginProvider import LoginProvider
+from UserRepository import UserRepository
 import time
 
 
 class LibraryManagementSystem:
 
     def __init__(self):
-        self.login_provider = LoginProvider()
-        self.library = Library(self.login_provider)
+        self.user_repository = UserRepository()
+        self.login_provider = LoginProvider(self.user_repository)
+        self.library = Library(self.login_provider, self.user_repository)
         self.current_menu = None
 
     def run(self):

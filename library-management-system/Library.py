@@ -4,7 +4,6 @@ from SearchFilter import SearchFilter
 from Book import Book
 from Menu import Menu
 from Option import Option
-from Reader import Reader
 from pathlib import Path
 import json
 import os
@@ -14,21 +13,20 @@ import time
 class Library:
     DEFAULT_BOOKS_FILE_PATH = Path('data', 'books.json')
 
-    def __init__(self, login_provider, books_file=DEFAULT_BOOKS_FILE_PATH):
+    def __init__(self, login_provider, user_repository, books_file=DEFAULT_BOOKS_FILE_PATH):
         self.books = []
         # TODO: to remove, i think
         self.borrowed_books = []
         self.reserved_books = []
         #
 
-        self.readers = []
         self.login_provider = login_provider
+        self.user_repository = user_repository
         self.books_file = books_file
         self.library_management_system = None
 
         # Load library state from JSON file
         self.load_books()
-        self.load_readers()
 
     def display_books(self, books_to_display=None):
         print(CommonFunction.create_bordered_string(MenuNames.ALL_BOOKS.value))
@@ -97,10 +95,11 @@ class Library:
     def display_readers(self):
         print(CommonFunction.create_bordered_string(
             MenuNames.ALL_READERS.value))
-        if len(self.readers) == 0:
+        readers_list = self.user_repository.readers
+        if len(readers_list) == 0:
             print(
                 f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
-        for index, reader in enumerate(self.readers):
+        for index, reader in enumerate(readers_list):
             print(f'{index + 1}.  {reader.to_string()}')
 
     def search_reader(self):
@@ -113,7 +112,6 @@ class Library:
         time.sleep(1)
         print(f'Wygenerowany numer karty: {library_card_number}')
         reader = self.login_provider.register_reader(library_card_number)
-        self.readers.append(reader)
         print(f"\n{Messages.READER_ADDED.value}:\n{reader}\n")
 
     def get_reserved_books(self):
@@ -145,9 +143,6 @@ class Library:
         with open(self.books_file, 'w', encoding='utf-8') as file:
             json.dump(books_dict_list, file)
 
-    def load_readers(self):
-        self.readers = self.login_provider.get_readers()
-
     # FIXME: I have no better idea for it but I use it in a few places
     def create_menu_for_objects(self, objects_list, menu_name, prompt_msg):
         options = []
@@ -160,6 +155,6 @@ class Library:
         return book_menu
 
     def generate_library_card_number(self):
-        next_reader_number = len(self.readers) + 1
+        next_reader_number = len(self.user_repository.readers) + 1
         next_card_number = str(next_reader_number).zfill(4)
         return f"LIB-{next_card_number}"
