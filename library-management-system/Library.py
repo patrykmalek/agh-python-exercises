@@ -133,7 +133,7 @@ class Library:
 
     def load_books(self):
         if not os.path.getsize(self.books_file) == 0:
-            with open(self.books_file, 'r') as file:
+            with open(self.books_file, 'r', encoding='utf-8') as file:
                 books_dict_list = json.load(file)
             for book_dict in books_dict_list:
                 self.books.append(Book.from_dict(book_dict))
@@ -142,7 +142,7 @@ class Library:
         books_dict_list = []
         for book in self.books:
             books_dict_list.append(book.to_dict())
-        with open(self.books_file, 'w') as file:
+        with open(self.books_file, 'w', encoding='utf-8') as file:
             json.dump(books_dict_list, file)
 
     def load_readers(self):

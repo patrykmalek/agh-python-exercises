@@ -17,11 +17,11 @@ class LoginProvider:
 
     def load_users(self):
         if not os.path.getsize(self.users_file) == 0:
-            with open(self.users_file, 'r') as f:
+            with open(self.users_file, 'r', encoding='utf-8') as f:
                 self.users = json.load(f)
 
     def save_users(self):
-        with open(self.users_file, 'w') as f:
+        with open(self.users_file, 'w', encoding='utf-8') as f:
             json.dump(self.users, f)
 
     def add_user(self, user):
