@@ -61,10 +61,7 @@ class Library:
 
     def add_book(self):
         print(CommonFunction.create_bordered_string(MenuNames.ADD_BOOK.value))
-        title = input("Podaj tytuł:")
-        author = input("Podaj autora:")
-
-        book = Book(title, author)
+        book = Book.create_book()
         self.books.append(book)
         self.save_books()
         print(f"{Messages.BOOK_ADDED.value}:\n{book}")
