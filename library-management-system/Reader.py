@@ -18,12 +18,6 @@ class Reader(User):
         })
         return reader_dict
 
-    def to_dict_without_user_data(self):
-        dict_without_user_data = self.to_dict()
-        del dict_without_user_data['login']
-        del dict_without_user_data['password']
-        return dict_without_user_data
-
     @staticmethod
     def from_dict(reader_dict):
         return Reader(

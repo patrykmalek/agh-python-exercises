@@ -134,7 +134,7 @@ class Library:
             with open(self.books_file, 'r', encoding='utf-8') as file:
                 books_dict_list = json.load(file)
             for book_dict in books_dict_list:
-                self.books.append(Book.from_dict(book_dict))
+                self.books.append(Book.from_dict(book_dict, self.user_repository))
 
     def save_books(self):
         books_dict_list = []

@@ -44,3 +44,7 @@ class UserRepository:
         for user_data in self.users:
             if user_data['role'] == 'librarian':
                 self.librarians.append(Librarian.from_dict(user_data))
+
+    def get_reader_by_id(self, reader_id):
+        readers_dict = {reader.user_id: reader for reader in self.readers}
+        return readers_dict.get(reader_id)
