@@ -16,11 +16,11 @@ class Library:
 
     def __init__(self, login_provider, books_file=DEFAULT_BOOKS_FILE_PATH):
         self.books = []
-        #TODO: to remove, i think
+        # TODO: to remove, i think
         self.borrowed_books = []
         self.reserved_books = []
         #
-        
+
         self.readers = []
         self.login_provider = login_provider
         self.books_file = books_file
@@ -61,13 +61,21 @@ class Library:
 
     def add_book(self):
         print(CommonFunction.create_bordered_string(MenuNames.ADD_BOOK.value))
-        book = Book.create_book()
+        title = input("Podaj tytuł:")
+        author = input("Podaj autora:")
+        while True:
+            isbn = input("Podaj 13 cyfrowy numer ISBN:")
+            if Book.validate_isbn(isbn):
+                break
+            print(Messages.ISBN_INVALID.value)
+        book = Book(isbn, title, author)
         self.books.append(book)
         self.save_books()
         print(f"{Messages.BOOK_ADDED.value}:\n{book}")
 
     def remove_book(self):
-        book_menu = self.create_menu_for_objects(self.books, MenuNames.REMOVE_BOOK.value, "Wybierz książkę lub wyszukaj:")
+        book_menu = self.create_menu_for_objects(self.books, MenuNames.REMOVE_BOOK.value,
+                                                 "Wybierz książkę lub wyszukaj:")
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         if selected_book in self.books:
@@ -80,11 +88,11 @@ class Library:
 
     def accept_return_book(self):
         awaiting_to_return_books = self.get_awaiting_to_return_books()
-        book_menu = self.create_menu_for_objects(awaiting_to_return_books, MenuNames.REMOVE_BOOK.value, "Wybierz książkę lub wyszukaj:")
+        book_menu = self.create_menu_for_objects(awaiting_to_return_books, MenuNames.REMOVE_BOOK.value,
+                                                 "Wybierz książkę lub wyszukaj:")
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
-        #TODO: find book in self.books, change some values and save in self.books
-
+        # TODO: find book in self.books, change some values and save in self.books
 
     def display_readers(self):
         print(CommonFunction.create_bordered_string(

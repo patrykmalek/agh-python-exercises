@@ -36,4 +36,5 @@ class Messages(Enum):
     NO_DATA = "Brak danych"
     DEFAULT_INPUT_MESSAGE = "Wybierz opcję z menu: "
     WRONG_CHOICE = "Wybrana pozycja nie istnieje. Wybierz ponownie. \n"
+    ISBN_INVALID = "ISBN nie spełnia wymagań 13 cyfr. Podaj poprawny ISBN"
     EXIT_MESSAGE = "Dziękujemy za skorzystanie z systemu biblioteki. Do zobaczenia!"

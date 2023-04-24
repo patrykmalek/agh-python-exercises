@@ -2,7 +2,7 @@ class Book:
 
     def __init__(self, isbn, title, author, is_borrowed=False, borrowed_by=None,
                  is_reserved=False, reserved_by=None, to_return=False):
-        self.isbn = self.validate_isbn(isbn)
+        self.isbn = isbn
         self.title = title
         self.author = author
         self.is_borrowed = is_borrowed
@@ -27,17 +27,9 @@ class Book:
 
     @staticmethod
     def validate_isbn(isbn):
-        if len(isbn) == 10:
-            return isbn
-        else:
-            raise ValueError("ISBN musi być 13 cyfrowym numerem.")
-
-    @staticmethod
-    def create_book():
-        title = input("Podaj tytuł:")
-        author = input("Podaj autora:")
-        isbn = input("Podaj numer ISBN:")
-        return Book(isbn, title, author)
+        if len(isbn) == 13:
+            return True
+        return False
 
     def to_dict(self):
         return {
@@ -56,9 +48,11 @@ class Book:
         return Book(
             book_dict['isbn'],
             book_dict['title'],
+            book_dict['author'],
             book_dict['is_borrowed'],
             book_dict['borrowed_by'],
             book_dict['is_reserved'],
+            book_dict['reserved_by'],
             book_dict['to_return']
         )
 
