@@ -5,8 +5,6 @@ from entities.Book import Book
 from entities.Menu import Menu
 from entities.Option import Option
 from pathlib import Path
-import json
-import os
 import time
 
 
@@ -119,6 +117,11 @@ class Library:
         return book_menu
 
     def generate_library_card_number(self):
+        used_cards = [reader.library_card_number for reader in self.user_repository.readers]
         next_reader_number = len(self.user_repository.readers) + 1
-        next_card_number = str(next_reader_number).zfill(4)
-        return f"LIB-{next_card_number}"
+        while True:
+            next_card_number = str(next_reader_number).zfill(4)
+            next_card_number = f"LIB-{next_card_number}"
+            if next_card_number not in used_cards:
+                return next_card_number
+            next_reader_number += 1
