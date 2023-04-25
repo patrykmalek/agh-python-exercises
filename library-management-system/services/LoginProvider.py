@@ -1,6 +1,7 @@
 from entities.Reader import Reader
 from entities.Librarian import Librarian
 from enums.LibraryEnums import Messages
+from utils.CommonFunction import CommonFunction
 
 
 class LoginProvider:
@@ -36,3 +37,20 @@ class LoginProvider:
                 print(Messages.LOGIN_ALREADY_EXIST.value)
                 return False
         return True
+
+    def login(self):
+        while True:
+            login, password = self.get_login_prompt()
+            user = self.user_repository.get_user_by_login(login)
+            CommonFunction.clear_view()
+            if user and user.password == password:
+                print(Messages.LOGIN_SUCCESS.value)
+                return user
+            else:
+                print(Messages.LOGIN_FAILED.value)
+
+    @staticmethod
+    def get_login_prompt():
+        login = input("Login: ")
+        password = input("Hasło: ")
+        return login, password
