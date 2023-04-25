@@ -5,6 +5,7 @@ from services.Library import Library
 from services.LoginProvider import LoginProvider
 from utils.CommonFunction import CommonFunction
 from repositories.UserRepository import UserRepository
+from repositories.BookRepository import BookRepository
 import time
 
 
@@ -12,8 +13,9 @@ class LibraryManagementSystem:
 
     def __init__(self):
         self.user_repository = UserRepository()
+        self.book_repository = BookRepository()
         self.login_provider = LoginProvider(self.user_repository)
-        self.library = Library(self.login_provider, self.user_repository)
+        self.library = Library(self.login_provider, self.book_repository, self.user_repository)
         self.current_menu = None
 
     def run(self):

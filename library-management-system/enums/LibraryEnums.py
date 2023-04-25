@@ -24,7 +24,9 @@ class Messages(Enum):
                                                     "na uczelni AGH", length=100, fill_char=" ") + "\n" + \
               CommonFunction.create_bordered_string("Autor: Patryk Małek", length=100, fill_char=" ")
     BOOK_ADDED = "Książka została dodana do biblioteki"
+    BOOK_ADDED_ERROR = "Nie powiodło się dodanie książki do biblioteki"
     BOOK_REMOVED = "Książka została usunięta z biblioteki"
+    BOOK_REMOVED_ERROR = "Nie powiodło się usunięcie książki z biblioteki"
     BOOK_NOT_FOUND = "Nie znaleziono książki"
     READER_ADDED = "Czytelnik został dodany do biblioteki"
     READER_NOT_FOUND = "Nie znaleziono czytelnika"

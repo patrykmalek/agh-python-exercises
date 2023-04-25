@@ -13,46 +13,30 @@ import time
 class Library:
     DEFAULT_BOOKS_FILE_PATH = Path('data', 'books.json')
 
-    def __init__(self, login_provider, user_repository, books_file=DEFAULT_BOOKS_FILE_PATH):
-        self.books = []
-        # TODO: to remove, i think
-        self.borrowed_books = []
-        self.reserved_books = []
-        #
-
+    def __init__(self, login_provider, book_repository, user_repository, books_file=DEFAULT_BOOKS_FILE_PATH):
         self.login_provider = login_provider
+        self.book_repository = book_repository
         self.user_repository = user_repository
         self.books_file = books_file
         self.library_management_system = None
 
-        # Load library state from JSON file
-        self.load_books()
-
-    def display_books(self, books_to_display=None):
-        print(CommonFunction.create_bordered_string(MenuNames.ALL_BOOKS.value))
+    def display_books(self, books_to_display=None, message=MenuNames.ALL_BOOKS.value):
+        print(CommonFunction.create_bordered_string(message))
         if books_to_display is None:
-            books_to_display = self.books
+            books_to_display = self.book_repository.get_books()
         if len(books_to_display) == 0:
             print(f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
         for index, book in enumerate(books_to_display):
             print(f'{index + 1}.  {book}')
 
     def display_borrowed_books(self):
-        print(CommonFunction.create_bordered_string(MenuNames.BORROWED_BOOKS.value))
-        if len(self.borrowed_books) == 0:
-            print(f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
-        for index, book in enumerate(self.borrowed_books):
-            print(f'{index + 1}.  {book}')
+        self.display_books(self.book_repository.get_borrowed_books(), MenuNames.BORROWED_BOOKS.value)
 
     def display_reserved_books(self):
-        print(CommonFunction.create_bordered_string(MenuNames.RESERVED_BOOKS.value))
-        if len(self.reserved_books) == 0:
-            print(f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
-        for index, book in enumerate(self.reserved_books):
-            print(f'{index + 1}.  {book}')
+        self.display_books(self.book_repository.get_reserved_books(), MenuNames.RESERVED_BOOKS.value)
 
     def search_book(self):
-        book_menu = self.create_menu_for_objects(self.books, MenuNames.SEARCH_BOOK.value, "Wyszukaj:")
+        book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.SEARCH_BOOK.value, "Wyszukaj:")
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         print(f"\n{selected_book}")
@@ -67,19 +51,21 @@ class Library:
                 break
             print(Messages.ISBN_INVALID.value)
         book = Book(isbn, title, author)
-        self.books.append(book)
-        self.save_books()
-        print(f"{Messages.BOOK_ADDED.value}:\n{book}")
+        if self.book_repository.add_book(book):
+            print(f"{Messages.BOOK_ADDED.value}:\n{book}")
+        else:
+            print(f"{Messages.BOOK_ADDED_ERROR.value}:\n")
 
     def remove_book(self):
-        book_menu = self.create_menu_for_objects(self.books, MenuNames.REMOVE_BOOK.value,
+        book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.REMOVE_BOOK.value,
                                                  "Wybierz książkę lub wyszukaj:")
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
-        if selected_book in self.books:
-            self.books.remove(selected_book)
-            self.save_books()
-        print(f"{Messages.BOOK_REMOVED.value}:\n{selected_book}")
+        if self.book_repository.remove_book(selected_book):
+            print(f"{Messages.BOOK_REMOVED.value}:\n{selected_book}")
+        else:
+            print(f"{Messages.BOOK_REMOVED_ERROR.value}:\n")
+
 
     def borrow_book(self):
         print("Borrowing book...")
@@ -113,35 +99,6 @@ class Library:
         print(f'Wygenerowany numer karty: {library_card_number}')
         reader = self.login_provider.register_reader(library_card_number)
         print(f"\n{Messages.READER_ADDED.value}:\n{reader}\n")
-
-    def get_reserved_books(self):
-        reserved_books = []
-        reserved_books = SearchFilter.filter_reserved_books(self.books)
-        return reserved_books
-
-    def get_borrowed_books(self):
-        borrowed_books = []
-        borrowed_books = SearchFilter.filter_borrowed_books(self.books)
-        return borrowed_books
-
-    def get_awaiting_to_return_books(self):
-        awaiting_to_return_books = []
-        awaiting_to_return_books = SearchFilter.filter_awaiting_to_return_books(self.books)
-        return awaiting_to_return_books
-
-    def load_books(self):
-        if not os.path.getsize(self.books_file) == 0:
-            with open(self.books_file, 'r', encoding='utf-8') as file:
-                books_dict_list = json.load(file)
-            for book_dict in books_dict_list:
-                self.books.append(Book.from_dict(book_dict, self.user_repository))
-
-    def save_books(self):
-        books_dict_list = []
-        for book in self.books:
-            books_dict_list.append(book.to_dict())
-        with open(self.books_file, 'w', encoding='utf-8') as file:
-            json.dump(books_dict_list, file)
 
     # FIXME: I have no better idea for it but I use it in a few places
     def create_menu_for_objects(self, objects_list, menu_name, prompt_msg):

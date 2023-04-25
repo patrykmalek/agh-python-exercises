@@ -1,3 +1,4 @@
+from repositories.UserRepository import UserRepository
 
 
 class Book:
@@ -46,7 +47,8 @@ class Book:
         }
 
     @staticmethod
-    def from_dict(book_dict, user_repository):
+    def from_dict(book_dict):
+        user_repository = UserRepository()
         borrowed_by = None
         reserved_by = None
 
