@@ -17,6 +17,10 @@ class UserRepository:
         self.load_readers()
         self.load_librarians()
 
+    def add_user(self, user):
+        self.user_repository.users.append(user.to_dict())
+        self.user_repository.save_users()
+
     def load_users(self):
         if not os.path.getsize(self.users_file) == 0:
             with open(self.users_file, 'r', encoding='utf-8') as f:

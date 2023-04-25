@@ -8,20 +8,16 @@ class LoginProvider:
     def __init__(self, user_repository):
         self.user_repository = user_repository
 
-    def add_user(self, user):
-        self.user_repository.users.append(user.to_dict())
-        self.user_repository.save_users()
-
     def register_reader(self, library_card_number):
         login, password, first_name, family_name = self.get_input()
         reader = Reader(None, login, password, first_name, family_name, library_card_number)
-        self.add_user(reader)
+        self.user_repository.add_user(reader)
         return reader
 
     def register_librarian(self, librarian_id):
         login, password, first_name, family_name = self.get_input()
         librarian = Librarian(None, login, password, first_name, family_name, librarian_id)
-        self.add_user(librarian)
+        self.user_repository.add_user(librarian)
         return librarian
 
     def get_input(self):
