@@ -1,6 +1,7 @@
 from .Option import Option, OptionMenu
 from utils.CommonFunction import CommonFunction
 from enums.LibraryEnums import MenuNames, Messages
+from enums.UserRole import UserRole
 
 
 class Menu:
@@ -80,7 +81,11 @@ class Menu:
         if self.parent_menu:
             print(f"0. {MenuNames.BACK.value}")
         print(f"q. {MenuNames.EXIT.value}")
-        print(CommonFunction.create_bordered_string("", fill_char="#"))
+        user = self.library_management_system.session.get_current_user()
+        user_details = f'{user.first_name} ' \
+                       f'{user.family_name} ' \
+                       f'({"Bibliotekarz" if user.role == UserRole.LIBRARIAN.value else "Czytelnik"})'
+        print(CommonFunction.create_bordered_string(f' {user_details} ', fill_char="#"))
 
     def set_parent_menu(self, parent_menu):
         self.parent_menu = parent_menu

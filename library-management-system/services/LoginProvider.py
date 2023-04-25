@@ -39,10 +39,12 @@ class LoginProvider:
         return True
 
     def login(self):
+        print(Messages.LOGIN_PROMPT.value)
         while True:
             login, password = self.get_login_prompt()
             user = self.user_repository.get_user_by_login(login)
             CommonFunction.clear_view()
+            print(Messages.WELCOME.value)
             if user and user.password == password:
                 print(Messages.LOGIN_SUCCESS.value)
                 return user

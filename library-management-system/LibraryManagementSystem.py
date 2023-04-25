@@ -23,6 +23,7 @@ class LibraryManagementSystem:
 
     def run(self):
         CommonFunction.clear_view()
+        print(Messages.WELCOME.value)
         user = self.login_provider.login()
         if user:
             self.session.login(user)
@@ -32,7 +33,6 @@ class LibraryManagementSystem:
                 self.current_menu = self.create_reader_menu()
             self.library.library_management_system = self
             self.current_menu.library_management_system = self
-            print(Messages.WELCOME.value)
             time.sleep(3)
             self.current_menu.execute_menu()
         else:
