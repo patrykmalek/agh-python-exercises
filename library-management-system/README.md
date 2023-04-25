@@ -15,7 +15,7 @@ Poniżej znajduje się lista funkcji, które powinny być dostępne w systemie:
 
 ### Dla czytelnika:
 
-- Logowanie do systemu jako czytelnik
+- Logowanie do systemu jako czytelnik ✔
 - Przeglądanie katalogu książek ✔
 - Wyszukiwanie książek po tytule, autorze lub słowach kluczowych ✔
 - Wypożyczanie książek
@@ -25,7 +25,7 @@ Poniżej znajduje się lista funkcji, które powinny być dostępne w systemie:
 
 ### Dla bibliotekarza:
 
-- Logowanie do systemu jako bibliotekarz
+- Logowanie do systemu jako bibliotekarz ✔
 - Przeglądanie katalogu książek ✔
 - Dodawanie nowych książek do katalogu ✔
 - Przyjmowanie zwrotów książek 
