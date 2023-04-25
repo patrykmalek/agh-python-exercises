@@ -1,5 +1,5 @@
 from enum import Enum
-from CommonFunction import CommonFunction
+from utils.CommonFunction import CommonFunction
 
 
 class MenuNames(Enum):

@@ -1,6 +1,6 @@
-from Option import Option, OptionMenu
-from CommonFunction import CommonFunction
-from LibraryEnums import MenuNames, Messages
+from .Option import Option, OptionMenu
+from utils.CommonFunction import CommonFunction
+from enums.LibraryEnums import MenuNames, Messages
 
 
 class Menu:

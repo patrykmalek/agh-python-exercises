@@ -1,12 +1,12 @@
 from pathlib import Path
-from Reader import Reader
-from Librarian import Librarian
+from entities.Reader import Reader
+from entities.Librarian import Librarian
 import os
 import json
 
 
 class UserRepository:
-    DEFAULT_USERS_FILE_PATH = Path('data', 'users.json')
+    DEFAULT_USERS_FILE_PATH = Path(__file__).parent.parent.joinpath('data', 'users.json')
 
     def __init__(self, users_file=DEFAULT_USERS_FILE_PATH):
         self.users_file = users_file

@@ -1,10 +1,10 @@
-from Menu import Menu
-from Option import Option, OptionMenu
-from Library import Library
-from LibraryEnums import MenuNames, Messages
-from CommonFunction import CommonFunction
-from LoginProvider import LoginProvider
-from UserRepository import UserRepository
+from entities.Menu import Menu
+from entities.Option import Option, OptionMenu
+from enums.LibraryEnums import MenuNames, Messages
+from services.Library import Library
+from services.LoginProvider import LoginProvider
+from utils.CommonFunction import CommonFunction
+from repositories.UserRepository import UserRepository
 import time
 
 

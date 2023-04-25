@@ -1,9 +1,9 @@
-from CommonFunction import CommonFunction
-from LibraryEnums import MenuNames, Messages
-from SearchFilter import SearchFilter
-from Book import Book
-from Menu import Menu
-from Option import Option
+from utils.CommonFunction import CommonFunction
+from utils.SearchFilter import SearchFilter
+from enums.LibraryEnums import MenuNames, Messages
+from entities.Book import Book
+from entities.Menu import Menu
+from entities.Option import Option
 from pathlib import Path
 import json
 import os

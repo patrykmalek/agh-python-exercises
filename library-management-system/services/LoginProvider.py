@@ -1,6 +1,6 @@
-from Reader import Reader
-from Librarian import Librarian
-from LibraryEnums import Messages
+from entities.Reader import Reader
+from entities.Librarian import Librarian
+from enums.LibraryEnums import Messages
 
 
 class LoginProvider:

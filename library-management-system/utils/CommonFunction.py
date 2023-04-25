@@ -2,6 +2,9 @@ import os
 
 
 class CommonFunction:
+    def __init__(self):
+        pass
+
     @staticmethod
     def create_bordered_string(text, length=60, fill_char='-'):
         if len(text) > length:
