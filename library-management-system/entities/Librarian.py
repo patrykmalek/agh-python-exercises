@@ -1,9 +1,10 @@
 from .User import User
+from enums.UserRole import UserRole
 
 
 class Librarian(User):
     def __init__(self, user_id, login, password, first_name, family_name, librarian_id):
-        super().__init__(user_id, login, password, first_name, family_name, 'librarian')
+        super().__init__(user_id, login, password, first_name, family_name, UserRole.LIBRARIAN)
         self.librarian_id = librarian_id
 
     def to_dict(self):

@@ -1,10 +1,11 @@
 from .User import User
+from enums.UserRole import UserRole
 
 
 class Reader(User):
     def __init__(self, user_id, login, password, first_name, family_name,
                  library_card_number, borrowed_books=[], reserved_books=[]):
-        super().__init__(user_id, login, password, first_name, family_name, 'reader')
+        super().__init__(user_id, login, password, first_name, family_name, UserRole.READER)
         self.library_card_number = library_card_number
         self.borrowed_books = borrowed_books
         self.reserved_books = reserved_books

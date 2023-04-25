@@ -27,9 +27,9 @@ class LibraryManagementSystem:
         user = self.login_provider.login()
         if user:
             self.session.login(user)
-            if self.session.current_user.role == UserRole.LIBRARIAN.value:
+            if self.session.current_user.role == UserRole.LIBRARIAN:
                 self.current_menu = self.create_librarian_menu()
-            if self.session.current_user.role == UserRole.READER.value:
+            if self.session.current_user.role == UserRole.READER:
                 self.current_menu = self.create_reader_menu()
             self.library.library_management_system = self
             self.current_menu.library_management_system = self

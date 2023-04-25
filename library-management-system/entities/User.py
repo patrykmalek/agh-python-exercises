@@ -17,5 +17,5 @@ class User:
             'password': self.password,
             'first_name': self.first_name,
             'family_name': self.family_name,
-            'role': self.role
+            'role': self.role.value
         }
