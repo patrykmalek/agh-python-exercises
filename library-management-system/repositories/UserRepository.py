@@ -1,6 +1,7 @@
 from pathlib import Path
 from entities.Reader import Reader
 from entities.Librarian import Librarian
+from enums.UserRole import UserRole
 import os
 import json
 
@@ -18,8 +19,8 @@ class UserRepository:
         self.load_librarians()
 
     def add_user(self, user):
-        self.user_repository.users.append(user.to_dict())
-        self.user_repository.save_users()
+        self.users.append(user.to_dict())
+        self.save_users()
 
     def load_users(self):
         if not os.path.getsize(self.users_file) == 0:
@@ -30,15 +31,6 @@ class UserRepository:
         with open(self.users_file, 'w', encoding='utf-8') as f:
             json.dump(self.users, f)
 
-    def get_user(self, login):
-        for user_data in self.users:
-            if user_data["login"] == login:
-                if user_data['role'] == 'reader':
-                    return Reader.from_dict(user_data)
-                elif user_data['role'] == 'librarian':
-                    return Librarian.from_dict(user_data)
-        return None
-
     def load_readers(self):
         for user_data in self.users:
             if user_data['role'] == 'reader':
@@ -48,6 +40,15 @@ class UserRepository:
         for user_data in self.users:
             if user_data['role'] == 'librarian':
                 self.librarians.append(Librarian.from_dict(user_data))
+
+    def get_user_by_login(self, login):
+        for user_data in self.users:
+            if user_data["login"] == login:
+                if user_data['role'] == UserRole.READER.value:
+                    return Reader.from_dict(user_data)
+                elif user_data['role'] == UserRole.LIBRARIAN.value:
+                    return Librarian.from_dict(user_data)
+        return None
 
     def get_reader_by_id(self, reader_id):
         readers_dict = {reader.user_id: reader for reader in self.readers}
