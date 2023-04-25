@@ -36,7 +36,8 @@ class Library:
         self.display_books(self.book_repository.get_reserved_books(), MenuNames.RESERVED_BOOKS.value)
 
     def search_book(self):
-        book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.SEARCH_BOOK.value, "Wyszukaj:")
+        book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.SEARCH_BOOK.value,
+                                                 "Wyszukaj:")
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         print(f"\n{selected_book}")
@@ -66,9 +67,13 @@ class Library:
         else:
             print(f"{Messages.BOOK_REMOVED_ERROR.value}:\n")
 
-
     def borrow_book(self):
-        print("Borrowing book...")
+        book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.BORROW_BOOK.value,
+                                                 "Wyszukaj i wypożycz:")
+        selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
+        CommonFunction.clear_view()
+        
+
 
     def accept_return_book(self):
         awaiting_to_return_books = self.get_awaiting_to_return_books()

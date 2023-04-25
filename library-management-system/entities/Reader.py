@@ -9,6 +9,12 @@ class Reader(User):
         self.borrowed_books = borrowed_books
         self.reserved_books = reserved_books
 
+    def borrow_book(self, book):
+        self.borrowed_books.append(book)
+
+    def reserved_book(self, book):
+        self.reserved_books.append(book)
+
     def to_dict(self):
         reader_dict = super().to_dict()
         reader_dict.update({
@@ -35,6 +41,6 @@ class Reader(User):
                f"\nNumer karty bibliotecznej: {self.library_card_number}"
 
     def to_string(self):
-        return f"{self.library_card_number} - {self.first_name} {self.family_name} ({self.login})"  \
+        return f"{self.library_card_number} - {self.first_name} {self.family_name} ({self.login})" \
                f"\n    Książki:\n     -wypożyczone: {len(self.borrowed_books)}\n     " \
                f"-zarezerwowane: {len(self.reserved_books)}"

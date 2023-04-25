@@ -47,6 +47,7 @@ class LibraryManagementSystem:
             Option("Wyświetl zarezerwowane książki", self.library.display_reserved_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Dodaj książkę", self.library.add_book),
+            Option("Przyjmij zwrot książki", None),
             Option("Usuń książkę", self.library.remove_book)
         ])
 
@@ -71,7 +72,7 @@ class LibraryManagementSystem:
     def create_reader_menu(self):
         books_management = Menu(MenuNames.BOOKS_MANAGEMENT.value, [
             Option("Wyświetl książki", self.library.display_books),
-            Option("Wyświetl wypożyczone książki", self.library.display_borrowed_books),
+            Option("Wyświetl wypożyczone książki", self.library.display_borrowed_books), # TODO display current reader borrowed books and etc
             Option("Wyświetl zarezerwowane książki", self.library.display_reserved_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Wypożycz książkę", self.library.borrow_book),
