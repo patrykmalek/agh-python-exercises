@@ -35,6 +35,9 @@ class Messages(Enum):
     READER_NOT_FOUND_BY_CARD = "Nie znaleziono czytelnika o podanym numerze karty"
     BORROW_SUCCESSFUL = "Książka została wypożyczona"
     RETURN_SUCCESSFUL = "Książka została zwrócona"
+    BOOK_ALREADY_BORROWED_BY_SM_EL = "Książka jest wypożyczona przez innego użytkownika"
+    BOOK_ALREADY_BORROWED_BY_USER = "Książka jest już w Twoim posiadaniu, nie można jej wypożyczyć."
+    BOOK_BORROW_CONFIRM = "Czy na pewno chcesz wypożyczyć tę książkę? (Y/N): "
     LOGIN_PROMPT = "Podaj login i hasło, aby się zalogować:"
     LOGIN_SUCCESS = CommonFunction.create_bordered_string("Logowanie udane!", length=100, fill_char=" ")
     LOGIN_FAILED = "Nieprawidłowy login lub hasło"
