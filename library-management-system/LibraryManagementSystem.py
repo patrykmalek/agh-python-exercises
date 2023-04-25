@@ -1,8 +1,10 @@
 from entities.Menu import Menu
 from entities.Option import Option, OptionMenu
 from enums.LibraryEnums import MenuNames, Messages
+from enums.UserRole import UserRole
 from services.Library import Library
 from services.LoginProvider import LoginProvider
+from services.Session import Session
 from utils.CommonFunction import CommonFunction
 from repositories.UserRepository import UserRepository
 from repositories.BookRepository import BookRepository
@@ -16,9 +18,29 @@ class LibraryManagementSystem:
         self.book_repository = BookRepository()
         self.login_provider = LoginProvider(self.user_repository)
         self.library = Library(self.login_provider, self.book_repository, self.user_repository)
+        self.session = Session()
         self.current_menu = None
 
     def run(self):
+        CommonFunction.clear_view()
+        user = self.login_provider.login()
+        if user:
+            self.session.login(user)
+            if self.session.current_user.role == UserRole.LIBRARIAN.value:
+                self.current_menu = self.create_librarian_menu()
+            if self.session.current_user.role == UserRole.READER.value:
+                self.current_menu = self.create_reader_menu()
+            self.library.library_management_system = self
+            self.current_menu.library_management_system = self
+            print(Messages.WELCOME.value)
+            time.sleep(3)
+            self.current_menu.execute_menu()
+        else:
+            CommonFunction.clear_view()
+            print(Messages.LOGIN_FAILED_ERROR.value)
+            exit()
+
+    def create_librarian_menu(self):
         books_management_by_librarian = Menu(MenuNames.BOOKS_MANAGEMENT.value, [
             Option("Wyświetl książki", self.library.display_books),
             Option("Wyświetl wypożyczone książki", self.library.display_borrowed_books),
@@ -34,22 +56,38 @@ class LibraryManagementSystem:
             Option("Dodaj czytelnika", self.library.add_reader),
         ])
 
-        librarian_main_menu = Menu(MenuNames.MAIN_MENU.value, [
-            Option("Wypożycz książkę", self.library.borrow_book),
-            OptionMenu("Zarządzanie książkami", None, books_management_by_librarian),
-            OptionMenu("Zarządzanie czytelnikami", None, readers_management_by_librarian),
+        settings_management = Menu(MenuNames.READERS_MANAGEMENT.value, [
+            Option("Zmień hasło", None)
         ])
 
-        self.current_menu = librarian_main_menu
-        self.library.library_management_system = self
-        self.current_menu.library_management_system = self
+        librarian_main_menu = Menu(MenuNames.MAIN_MENU.value, [
+            OptionMenu("Zarządzanie książkami", None, books_management_by_librarian),
+            OptionMenu("Zarządzanie czytelnikami", None, readers_management_by_librarian),
+            OptionMenu("Ustawienia konta", None, settings_management),
+        ])
 
-        CommonFunction.clear_view()
-        print(Messages.WELCOME.value)
-        time.sleep(3)
+        return librarian_main_menu
 
-        librarian_main_menu.execute_menu()
+    def create_reader_menu(self):
+        books_management = Menu(MenuNames.BOOKS_MANAGEMENT.value, [
+            Option("Wyświetl książki", self.library.display_books),
+            Option("Wyświetl wypożyczone książki", self.library.display_borrowed_books),
+            Option("Wyświetl zarezerwowane książki", self.library.display_reserved_books),
+            Option("Wyszukaj książkę", self.library.search_book),
+            Option("Wypożycz książkę", self.library.borrow_book),
+            Option("Zwróć książkę", self.library.add_book)
+        ])
 
+        settings_management = Menu(MenuNames.READERS_MANAGEMENT.value, [
+            Option("Zmień hasło", None)
+        ])
+
+        reader_main_menu = Menu(MenuNames.MAIN_MENU.value, [
+            OptionMenu("Biblioteka", None, books_management),
+            OptionMenu("Ustawienia konta", None, settings_management),
+        ])
+
+        return reader_main_menu
 
 """
 URUCHOMIENIE PROGRAMU

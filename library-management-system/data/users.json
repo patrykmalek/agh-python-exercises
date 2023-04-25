@@ -1,0 +1,33 @@
+[
+  {
+    "user_id": "40829efb-84f5-41da-950e-aeb3559c4e3c",
+    "login": "pmalek",
+    "password": "123",
+    "first_name": "Patryk",
+    "family_name": "Ma\u0142ek",
+    "role": "librarian",
+    "librarian_id": "0001"
+  },
+  {
+    "user_id": "2a878b79-bb65-4227-8db3-77be2facbfe8",
+    "login": "jkowalski",
+    "password": "1234",
+    "first_name": "Jan",
+    "family_name": "Kowalski",
+    "role": "reader",
+    "library_card_number": "LIB-0002",
+    "borrowed_books": [],
+    "reserved_books": []
+  },
+  {
+    "user_id": "15d16448-fb83-49c0-9ca2-4a20b3bf99a5",
+    "login": "pnowak",
+    "password": "1234",
+    "first_name": "Piotr",
+    "family_name": "Nowak",
+    "role": "reader",
+    "library_card_number": "LIB-0003",
+    "borrowed_books": [],
+    "reserved_books": []
+  }
+]
