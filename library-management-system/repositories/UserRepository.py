@@ -20,6 +20,8 @@ class UserRepository:
 
     def add_user(self, user):
         self.users.append(user.to_dict())
+        self.readers.append(user)
+        self.librarians.append(user)
         self.save_users()
 
     def load_users(self):
