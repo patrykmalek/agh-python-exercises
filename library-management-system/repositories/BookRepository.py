@@ -14,18 +14,26 @@ class BookRepository:
         self.load_books()
 
     def add_book(self, book):
-        if book not in self.books:
+        isbn_books = [book.isbn for book in self.books]
+        if book.isbn not in isbn_books:
             self.books.append(book)
             self.save_books()
             return True
         return False
 
     def remove_book(self, book):
-        if book in self.books:
+        isbn_books = [book.isbn for book in self.books]
+        if book.isbn in isbn_books:
             self.books.remove(book)
             self.save_books()
             return True
         return False
+
+    def update_book(self, updated_book):
+        for book in self.books:
+            if book.isbn == updated_book.isbn:
+                #TODO
+
 
     def load_books(self):
         if not os.path.getsize(self.books_file) == 0:
