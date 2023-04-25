@@ -3,6 +3,15 @@ class SearchFilter:
         pass
 
     @staticmethod
+    def filter_readers(readers_option, query):
+        return list(filter(lambda x:
+                           query in x.obj_instance.login.lower() or
+                           query in x.obj_instance.first_name.lower() or
+                           query in x.obj_instance.family_name.lower() or
+                           query in x.obj_instance.library_card_number.lower(),
+                           readers_option))
+
+    @staticmethod
     def filter_books_by_title_and_author(books_option, query):
         return list(filter(lambda x: query in x.obj_instance.title.lower() or query in x.obj_instance.author.lower(),
                            books_option))

@@ -79,17 +79,19 @@ class Library:
         # TODO: find book in self.books, change some values and save in self.books
 
     def display_readers(self):
-        print(CommonFunction.create_bordered_string(
-            MenuNames.ALL_READERS.value))
+        print(CommonFunction.create_bordered_string(MenuNames.ALL_READERS.value))
         readers_list = self.user_repository.readers
         if len(readers_list) == 0:
-            print(
-                f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
+            print(f'\n {CommonFunction.create_bordered_string(Messages.NO_DATA.value, fill_char=" ")} \n')
         for index, reader in enumerate(readers_list):
             print(f'{index + 1}.  {reader.to_string()}')
 
     def search_reader(self):
-        print("Searching reader...")
+        reader_menu = self.create_menu_for_objects(self.user_repository.readers,
+                                                   MenuNames.SEARCH_READER.value, "Wyszukaj:")
+        selected_reader = reader_menu.execute_menu_and_get_object(SearchFilter.filter_readers)
+        CommonFunction.clear_view()
+        print(f"\n{selected_reader}")
 
     def add_reader(self):
         print(CommonFunction.create_bordered_string(MenuNames.ADD_READER.value))
