@@ -8,6 +8,12 @@ import json
 
 class UserRepository:
     DEFAULT_USERS_FILE_PATH = Path(__file__).parent.parent.joinpath('data', 'users.json')
+    __instance = None
+
+    def __new__(cls):
+        if cls.__instance is None:
+            cls.__instance = super().__new__(cls)
+        return cls.__instance
 
     def __init__(self, users_file=DEFAULT_USERS_FILE_PATH):
         self.users_file = users_file
