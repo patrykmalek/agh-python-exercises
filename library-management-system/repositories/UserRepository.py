@@ -71,12 +71,12 @@ class UserRepository:
                 self.librarians.append(Librarian.from_dict(user_data))
 
     def get_user_by_login(self, login):
-        for user_data in self.users:
-            if user_data["login"] == login:
-                if user_data['role'] == UserRole.READER.value:
-                    return Reader.from_dict(user_data)
-                elif user_data['role'] == UserRole.LIBRARIAN.value:
-                    return Librarian.from_dict(user_data)
+        readers_dict = {reader.login: reader for reader in self.readers}
+        librarians_dict = {librarian.login: librarian for librarian in self.librarians}
+        if login in readers_dict:
+            return readers_dict.get(login)
+        if login in librarians_dict:
+            return librarians_dict.get(login)
         return None
 
     def get_reader_by_id(self, reader_id):

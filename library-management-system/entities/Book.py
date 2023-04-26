@@ -1,4 +1,3 @@
-from repositories.UserRepository import UserRepository
 
 
 class Book:
@@ -48,26 +47,14 @@ class Book:
 
     @staticmethod
     def from_dict(book_dict):
-        user_repository = UserRepository()
-        borrowed_by = None
-        reserved_by = None
-
-        borrowed_by_id = book_dict.get("borrowed_by")
-        if borrowed_by_id is not None:
-            borrowed_by = user_repository.get_reader_by_id(borrowed_by_id)
-
-        reserved_by_id = book_dict.get("reserved_by")
-        if reserved_by_id is not None:
-            reserved_by = user_repository.get_reader_by_id(reserved_by_id)
-
         return Book(
             book_dict['isbn'],
             book_dict['title'],
             book_dict['author'],
             book_dict['is_borrowed'],
-            borrowed_by,
+            book_dict["borrowed_by"],
             book_dict['is_reserved'],
-            reserved_by,
+            book_dict["reserved_by"],
             book_dict['to_return']
         )
 
