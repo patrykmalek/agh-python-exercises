@@ -14,15 +14,36 @@ class UserRepository:
         self.users = []
         self.readers = []
         self.librarians = []
+
         self.load_users()
         self.load_readers()
         self.load_librarians()
 
     def add_user(self, user):
         self.users.append(user.to_dict())
-        self.readers.append(user)
-        self.librarians.append(user)
+        if user.role == UserRole.READER:
+            self.readers.append(user)
+        if user.role == UserRole.LIBRARIAN:
+            self.librarians.append(user)
         self.save_users()
+
+    def update_user(self, updated_user):
+        updated_user_dict = updated_user.to_dict()
+        for user_data in self.users:
+            if user_data['user_id'] == updated_user_dict['user_id']:
+                user_data['login'] = updated_user_dict['login']
+                user_data['password'] = updated_user_dict['password']  # TODO: maybe hashed password?
+                user_data['first_name'] = updated_user_dict['first_name']
+                user_data['family_name'] = updated_user_dict['family_name']
+                if user_data['role'] == UserRole.READER.value:
+                    user_data['library_card_number'] = updated_user_dict['library_card_number']
+                    user_data['borrowed_books'] = updated_user_dict['borrowed_books']
+                    user_data['reserved_books'] = updated_user_dict['reserved_books']
+                if user_data['role'] == UserRole.LIBRARIAN.value:
+                    user_data['librarian_id'] = updated_user_dict['librarian_id']
+                self.save_users()
+                return True
+        return False
 
     def load_users(self):
         if not os.path.getsize(self.users_file) == 0:

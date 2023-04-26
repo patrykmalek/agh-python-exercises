@@ -77,29 +77,31 @@ class Library:
             borrow_successful = selected_book.borrow(current_reader)
             if borrow_successful:
                 current_reader.borrow_book(selected_book)
+                self.book_repository.update_book(selected_book)
+                self.user_repository.update_user(current_reader)
                 print(Messages.BORROW_SUCCESSFUL.value)
             elif not borrow_successful and selected_book.borrowed_by != current_reader:
                 print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
             else:
                 print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
 
-    def borrow_book(self):
-        current_reader = self.library_management_system.session.current_user
-        book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.BORROW_BOOK.value,
-                                                 "Wyszukaj i wypożycz:")
-        selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
-        CommonFunction.clear_view()
-        print(f'Wybrana książka: {selected_book}\n')
-        option = input(Messages.BOOK_BORROW_CONFIRM.value)
-        if option.lower() == "y":
-            borrow_successful = selected_book.borrow(current_reader)
-            if borrow_successful:
-                current_reader.borrow_book(selected_book)
-                print(Messages.BORROW_SUCCESSFUL.value)
-            elif not borrow_successful and selected_book.borrowed_by != current_reader:
-                print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
-            else:
-                print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
+    # def borrow_book(self):
+    #     current_reader = self.library_management_system.session.current_user
+    #     book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.BORROW_BOOK.value,
+    #                                              "Wyszukaj i wypożycz:")
+    #     selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
+    #     CommonFunction.clear_view()
+    #     print(f'Wybrana książka: {selected_book}\n')
+    #     option = input(Messages.BOOK_BORROW_CONFIRM.value)
+    #     if option.lower() == "y":
+    #         borrow_successful = selected_book.borrow(current_reader)
+    #         if borrow_successful:
+    #             current_reader.borrow_book(selected_book)
+    #             print(Messages.BORROW_SUCCESSFUL.value)
+    #         elif not borrow_successful and selected_book.borrowed_by != current_reader:
+    #             print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
+    #         else:
+    #             print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
 
 
     def accept_return_book(self):

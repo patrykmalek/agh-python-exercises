@@ -32,8 +32,14 @@ class BookRepository:
     def update_book(self, updated_book):
         for book in self.books:
             if book.isbn == updated_book.isbn:
-                #TODO
-
+                book.title = updated_book.title
+                book.author = updated_book.author
+                book.is_borrowed = updated_book.is_borrowed
+                book.borrowed_by = updated_book.borrowed_by
+                book.is_reserved = updated_book.is_reserved
+                book.reserved_by = updated_book.reserved_by
+                book.to_return = updated_book.to_return
+        self.save_books()
 
     def load_books(self):
         if not os.path.getsize(self.books_file) == 0:
@@ -63,3 +69,7 @@ class BookRepository:
 
     def get_books(self):
         return self.books
+
+    def get_book_by_isbn(self, book_isbn):
+        books_dict = {book.isbn: book for book in self.books}
+        return books_dict.get(book_isbn)
