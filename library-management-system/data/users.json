@@ -31,7 +31,11 @@
     "family_name": "Nowak",
     "role": "reader",
     "library_card_number": "LIB-0003",
-    "borrowed_books": [],
-    "reserved_books": []
+    "borrowed_books": [
+      "9788378398123"
+    ],
+    "reserved_books": [
+      "9788378399123"
+    ]
   }
 ]

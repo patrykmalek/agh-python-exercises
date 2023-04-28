@@ -12,8 +12,12 @@ class Reader(User):
 
     def borrow_book(self, book):
         self.borrowed_books.append(book)
+        for reserved_book in self.reserved_books:
+            if reserved_book.isbn == book.isbn:
+                self.reserved_books.remove(reserved_book)
+                break
 
-    def reserved_book(self, book):
+    def reserve_book(self, book):
         self.reserved_books.append(book)
 
     def return_book(self, book):

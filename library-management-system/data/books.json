@@ -8,7 +8,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": null,
+    "due_reservation_date": null
   },
   {
     "isbn": "9788366428082",
@@ -19,7 +20,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": true,
-    "due_borrow_date": "2023-05-28"
+    "due_borrow_date": "2023-05-28",
+    "due_reservation_date": null
   },
   {
     "isbn": "9788375108183",
@@ -30,18 +32,20 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": null,
+    "due_reservation_date": null
   },
   {
     "isbn": "9788378398123",
     "title": "Dziewczyna z poci\u0105gu",
     "author": "Paula Hawkins",
-    "is_borrowed": false,
-    "borrowed_by": null,
+    "is_borrowed": true,
+    "borrowed_by": "15d16448-fb83-49c0-9ca2-4a20b3bf99a5",
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": "2023-05-28",
+    "due_reservation_date": null
   },
   {
     "isbn": "9788366723754",
@@ -52,7 +56,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": null,
+    "due_reservation_date": null
   },
   {
     "isbn": "9788376860315",
@@ -63,7 +68,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": true,
-    "due_borrow_date": "2023-06-11"
+    "due_borrow_date": "2023-06-11",
+    "due_reservation_date": null
   },
   {
     "isbn": "9788375780677",
@@ -74,7 +80,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": null,
+    "due_reservation_date": null
   },
   {
     "isbn": "9788324049903",
@@ -85,7 +92,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": null,
+    "due_reservation_date": null
   },
   {
     "isbn": "9788328300048",
@@ -96,7 +104,8 @@
     "is_reserved": false,
     "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": null
+    "due_borrow_date": null,
+    "due_reservation_date": null
   },
   {
     "isbn": "9788378399123",
@@ -104,9 +113,10 @@
     "author": "Astrid Lindgren",
     "is_borrowed": true,
     "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
-    "is_reserved": false,
-    "reserved_by": null,
+    "is_reserved": true,
+    "reserved_by": "15d16448-fb83-49c0-9ca2-4a20b3bf99a5",
     "to_return": false,
-    "due_borrow_date": "2023-06-04"
+    "due_borrow_date": "2023-06-04",
+    "due_reservation_date": "2023-05-05"
   }
 ]

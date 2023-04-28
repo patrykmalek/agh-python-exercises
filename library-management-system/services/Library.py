@@ -105,6 +105,14 @@ class Library:
             elif not borrow_successful and \
                     (selected_book.is_borrowed and selected_book.borrowed_by.user_id != current_reader.user_id):
                 print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
+                option = input(Messages.BOOK_RESERVE_CONFIRM.value)
+                if option.lower() == "y":
+                    reserve_successful = selected_book.reserve(current_reader)
+                    if reserve_successful:
+                        current_reader.reserve_book(selected_book)
+                        self.book_repository.update_book(selected_book)
+                        self.user_repository.update_user(current_reader)
+                        print(f'{Messages.RESERVATION_SUCCESSFUL.value} {selected_book.due_reservation_date}')
             elif not borrow_successful and \
                     (selected_book.is_reserved and selected_book.reserved_by.user_id != current_reader.user_id):
                 print(Messages.BOOK_ALREADY_RESERVED_BY_SM_EL.value)
