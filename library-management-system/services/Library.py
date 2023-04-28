@@ -113,11 +113,14 @@ class Library:
                         self.book_repository.update_book(selected_book)
                         self.user_repository.update_user(current_reader)
                         print(f'{Messages.RESERVATION_SUCCESSFUL.value} {selected_book.due_reservation_date}')
+                    elif selected_book.is_reserved and selected_book.reserved_by.user_id == current_reader.user_id:
+                        print(Messages.BOOK_ALREADY_RESERVED_BY_USER.value)
+            elif not borrow_successful and \
+                    (selected_book.is_borrowed and selected_book.borrowed_by.user_id == current_reader.user_id):
+                print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
             elif not borrow_successful and \
                     (selected_book.is_reserved and selected_book.reserved_by.user_id != current_reader.user_id):
                 print(Messages.BOOK_ALREADY_RESERVED_BY_SM_EL.value)
-            else:
-                print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
 
     def extend_due_borrow_date(self):
         current_reader = self.library_management_system.session.get_current_user()
@@ -148,20 +151,29 @@ class Library:
             print(f'Wybrana książka: {selected_book}\n')
             option = input(Messages.BOOK_RETURN_CONFIRM.value)
             if option.lower() == "y":
-                return_successful = selected_book.marked_for_return(current_reader)
-                if return_successful:
-                    current_reader.return_book(selected_book)
+                marked_return_successful = selected_book.marked_for_return(current_reader)
+                if marked_return_successful:
+                    current_reader.marked_for_return(selected_book)
                     self.book_repository.update_book(selected_book)
                     self.user_repository.update_user(current_reader)
                     print(Messages.BOOK_AFTER_RETURN_INFO.value)
 
     def accept_return_book(self):
-        awaiting_to_return_books = self.get_awaiting_to_return_books()
-        book_menu = self.create_menu_for_objects(awaiting_to_return_books, MenuNames.REMOVE_BOOK.value,
+        awaiting_to_return_books = SearchFilter.filter_awaiting_to_return_books(self.book_repository.get_books())
+        book_menu = self.create_menu_for_objects(awaiting_to_return_books, MenuNames.ACCEPT_RETURN_BOOK.value,
                                                  MenuNames.CHOOSE_BOOK.value)
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
-        # TODO: find book in self.books, change some values and save in self.books
+        print(f'Wybrana książka: {selected_book}\n')
+        option = input(Messages.BOOK_ACCEPT_RETURN_CONFIRM.value)
+        if option.lower() == "y":
+            borrowing_user = selected_book.borrowed_by
+            return_successful = selected_book.return_book()
+            if return_successful:
+                borrowing_user.return_book(selected_book)
+                self.book_repository.update_book(selected_book)
+                self.user_repository.update_user(borrowing_user)
+                print(Messages.BOOK_AFTER_ACCEPT_RETURN_INFO.value)
 
     def display_readers(self):
         print(CommonFunction.create_bordered_string(MenuNames.ALL_READERS.value))

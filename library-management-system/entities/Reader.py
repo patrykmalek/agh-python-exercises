@@ -20,10 +20,17 @@ class Reader(User):
     def reserve_book(self, book):
         self.reserved_books.append(book)
 
-    def return_book(self, book):
+    def marked_for_return(self, book):
         for borrowed_book in self.borrowed_books:
             if borrowed_book.isbn == book.isbn:
                 borrowed_book.to_return = book.to_return
+                break
+
+    def return_book(self, book):
+        for borrowed_book in self.borrowed_books:
+            if borrowed_book.isbn == book.isbn:
+                self.borrowed_books.remove(borrowed_book)
+                break
 
     def extend_due_borrow_date(self, book):
         for borrowed_book in self.borrowed_books:

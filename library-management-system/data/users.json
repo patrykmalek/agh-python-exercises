@@ -16,11 +16,7 @@
     "family_name": "Kowalski",
     "role": "reader",
     "library_card_number": "LIB-0002",
-    "borrowed_books": [
-      "9788376860315",
-      "9788366428082",
-      "9788378399123"
-    ],
+    "borrowed_books": [],
     "reserved_books": []
   },
   {
@@ -32,10 +28,9 @@
     "role": "reader",
     "library_card_number": "LIB-0003",
     "borrowed_books": [
-      "9788378398123"
-    ],
-    "reserved_books": [
+      "9788378398123",
       "9788378399123"
-    ]
+    ],
+    "reserved_books": []
   }
 ]

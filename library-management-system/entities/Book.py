@@ -28,7 +28,6 @@ class Book:
             if self.is_reserved:
                 self.reserved_by = None
                 self.is_reserved = False
-                self.due_borrow_date = None
                 self.due_reservation_date = None
             return True
 
@@ -50,6 +49,15 @@ class Book:
     def marked_for_return(self, reader):
         if self.is_borrowed and self.borrowed_by.user_id == reader.user_id:
             self.to_return = True
+            return True
+        return False
+
+    def return_book(self):
+        if self.is_borrowed:
+            self.is_borrowed = False
+            self.borrowed_by = None
+            self.to_return = False
+            self.due_borrow_date = None
             return True
         return False
 

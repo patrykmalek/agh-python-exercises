@@ -15,12 +15,12 @@
     "isbn": "9788366428082",
     "title": "The Lord of the Rings",
     "author": "J.R.R. Tolkien",
-    "is_borrowed": true,
-    "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
+    "is_borrowed": false,
+    "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": true,
-    "due_borrow_date": "2023-05-28",
+    "to_return": false,
+    "due_borrow_date": null,
     "due_reservation_date": null
   },
   {
@@ -63,12 +63,12 @@
     "isbn": "9788376860315",
     "title": "S\u0142ownik j\u0119zyka polskiego",
     "author": "PWN",
-    "is_borrowed": true,
-    "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
+    "is_borrowed": false,
+    "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": true,
-    "due_borrow_date": "2023-06-11",
+    "to_return": false,
+    "due_borrow_date": null,
     "due_reservation_date": null
   },
   {
@@ -112,11 +112,11 @@
     "title": "Dzieci z bullerbyn",
     "author": "Astrid Lindgren",
     "is_borrowed": true,
-    "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
-    "is_reserved": true,
-    "reserved_by": "15d16448-fb83-49c0-9ca2-4a20b3bf99a5",
+    "borrowed_by": "15d16448-fb83-49c0-9ca2-4a20b3bf99a5",
+    "is_reserved": false,
+    "reserved_by": null,
     "to_return": false,
-    "due_borrow_date": "2023-06-04",
-    "due_reservation_date": "2023-05-05"
+    "due_borrow_date": "2023-05-28",
+    "due_reservation_date": null
   }
 ]

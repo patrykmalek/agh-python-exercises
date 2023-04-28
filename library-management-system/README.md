@@ -28,7 +28,7 @@ Poniżej znajduje się lista funkcji, które powinny być dostępne w systemie:
 - Logowanie do systemu jako bibliotekarz ✔
 - Przeglądanie katalogu książek ✔
 - Dodawanie nowych książek do katalogu ✔
-- Przyjmowanie zwrotów książek 
+- Przyjmowanie zwrotów książek ✔
 - Usuwanie książek z katalogu ✔
 - Dodawanie nowych czytelników do systemu ✔
 
