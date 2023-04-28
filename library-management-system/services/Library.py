@@ -49,6 +49,12 @@ class Library:
             books_to_display = current_user.reserved_books
             self.display_books(books_to_display, MenuNames.READER_RESERVED_BOOKS.value)
 
+    def display_reader_with_return_mark_books(self):
+        current_user = self.library_management_system.session.get_current_user()
+        if current_user.role == UserRole.READER:
+            books_to_display = SearchFilter.filter_awaiting_to_return_books(current_user.borrowed_books)
+            self.display_books(books_to_display, MenuNames.READER_RETURN_MARK_BOOKS.value)
+
     def search_book(self):
         book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.SEARCH_BOOK.value,
                                                  "Wyszukaj:")
@@ -101,23 +107,23 @@ class Library:
             else:
                 print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
 
-    # def borrow_book(self):
-    #     current_reader = self.library_management_system.session.current_user
-    #     book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.BORROW_BOOK.value,
-    #                                              "Wyszukaj i wypożycz:")
-    #     selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
-    #     CommonFunction.clear_view()
-    #     print(f'Wybrana książka: {selected_book}\n')
-    #     option = input(Messages.BOOK_BORROW_CONFIRM.value)
-    #     if option.lower() == "y":
-    #         borrow_successful = selected_book.borrow(current_reader)
-    #         if borrow_successful:
-    #             current_reader.borrow_book(selected_book)
-    #             print(Messages.BORROW_SUCCESSFUL.value)
-    #         elif not borrow_successful and selected_book.borrowed_by != current_reader:
-    #             print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
-    #         else:
-    #             print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
+    def return_book(self):
+        current_reader = self.library_management_system.session.get_current_user()
+        if current_reader.role == UserRole.READER:
+            borrowed_books = SearchFilter.filter_borrowed_books_without_return_mark(current_reader.borrowed_books)
+            book_menu = self.create_menu_for_objects(borrowed_books, MenuNames.REMOVE_BOOK.value,
+                                             "Wybierz książkę do zwrotu lub wyszukaj:")
+            selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
+            CommonFunction.clear_view()
+            print(f'Wybrana książka: {selected_book}\n')
+            option = input(Messages.BOOK_RETURN_CONFIRM.value)
+            if option.lower() == "y":
+                return_successful = selected_book.marked_for_return(current_reader)
+                if return_successful:
+                    current_reader.return_book(selected_book)
+                    self.book_repository.update_book(selected_book)
+                    self.user_repository.update_user(current_reader)
+                    print(Messages.BOOK_AFTER_RETURN_INFO.value)
 
     def accept_return_book(self):
         awaiting_to_return_books = self.get_awaiting_to_return_books()

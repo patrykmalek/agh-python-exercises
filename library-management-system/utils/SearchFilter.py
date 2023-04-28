@@ -22,6 +22,11 @@ class SearchFilter:
                            books_list))
 
     @staticmethod
+    def filter_borrowed_books_without_return_mark(books_list):
+        return list(filter(lambda x: x.is_borrowed is True and x.borrowed_by is not None and x.to_return is False,
+                           books_list))
+
+    @staticmethod
     def filter_reserved_books(books_list):
         return list(filter(lambda x: x.is_reserved is True and x.reserved_by is not None,
                            books_list))

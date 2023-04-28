@@ -47,7 +47,7 @@ class LibraryManagementSystem:
             Option("Wyświetl zarezerwowane książki", self.library.display_reserved_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Dodaj książkę", self.library.add_book),
-            Option("Przyjmij zwrot książki", None),
+            Option("Przyjmij zwrot książki", self.library.accept_return_book),
             Option("Usuń książkę", self.library.remove_book)
         ])
 
@@ -74,9 +74,10 @@ class LibraryManagementSystem:
             Option("Wyświetl książki", self.library.display_books),
             Option("Wyświetl wypożyczone książki", self.library.display_reader_borrowed_books),
             Option("Wyświetl zarezerwowane książki", self.library.display_reader_reserved_books),
+            Option("Wyświetl książki do zwrotu", self.library.display_reader_with_return_mark_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Wypożycz książkę", self.library.borrow_book),
-            Option("Zwróć książkę", self.library.add_book)
+            Option("Zwróć książkę", self.library.return_book)
         ])
 
         settings_management = Menu(MenuNames.READERS_MANAGEMENT.value, [

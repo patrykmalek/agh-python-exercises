@@ -17,7 +17,7 @@
     "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": true
   },
   {
     "isbn": "9788375108183",

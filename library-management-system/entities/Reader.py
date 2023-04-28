@@ -16,6 +16,11 @@ class Reader(User):
     def reserved_book(self, book):
         self.reserved_books.append(book)
 
+    def return_book(self, book):
+        for borrowed_book in self.borrowed_books:
+            if borrowed_book.isbn == book.isbn:
+                borrowed_book.to_return = True
+
     def to_dict(self):
         reader_dict = super().to_dict()
         reader_dict.update({

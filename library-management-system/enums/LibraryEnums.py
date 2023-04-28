@@ -11,6 +11,7 @@ class MenuNames(Enum):
     RESERVED_BOOKS = "Zarezerwowane książki"
     READER_BORROWED_BOOKS = "Twoje wypożyczone książki"
     READER_RESERVED_BOOKS = "Twoje zarezerwowane książki"
+    READER_RETURN_MARK_BOOKS = "Twoje książki do zwrotu"
     ADD_BOOK = "Dodawanie książki"
     REMOVE_BOOK = "Usuwanie książki"
     SEARCH_BOOK = "Wyszukiwanie książki"
@@ -40,6 +41,9 @@ class Messages(Enum):
     BOOK_ALREADY_BORROWED_BY_SM_EL = "Książka jest wypożyczona przez innego użytkownika"
     BOOK_ALREADY_BORROWED_BY_USER = "Książka jest już w Twoim posiadaniu, nie można jej wypożyczyć."
     BOOK_BORROW_CONFIRM = "Czy na pewno chcesz wypożyczyć tę książkę? (Y/N): "
+    BOOK_RETURN_CONFIRM = "Czy na pewno chcesz zwrócić tę książkę? (Y/N): "
+    BOOK_AFTER_RETURN_INFO = "Książka została oznaczona do zwrotu, " \
+                             "proszę udać się do biblioteki w celu fizycznego zwrotu książki."
     LOGIN_PROMPT = "Podaj login i hasło, aby się zalogować:"
     LOGIN_SUCCESS = CommonFunction.create_bordered_string("Logowanie udane!", length=100, fill_char=" ")
     LOGIN_FAILED = "Nieprawidłowy login lub hasło"

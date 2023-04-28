@@ -27,6 +27,12 @@ class Book:
             return True
         return False
 
+    def marked_for_return(self, reader):
+        if self.is_borrowed and self.borrowed_by.user_id == reader.user_id:
+            self.to_return = True
+            return True
+        return False
+
     @staticmethod
     def validate_isbn(isbn):
         if len(isbn) == 13:
