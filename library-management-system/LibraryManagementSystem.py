@@ -58,7 +58,7 @@ class LibraryManagementSystem:
         ])
 
         settings_management = Menu(MenuNames.READERS_MANAGEMENT.value, [
-            Option("Zmień hasło", None)
+            Option("Zmień hasło", self.login_provider.change_password)
         ])
 
         librarian_main_menu = Menu(MenuNames.MAIN_MENU.value, [
@@ -82,7 +82,7 @@ class LibraryManagementSystem:
         ])
 
         settings_management = Menu(MenuNames.READERS_MANAGEMENT.value, [
-            Option("Zmień hasło", None)
+            Option("Zmień hasło", self.login_provider.change_password)
         ])
 
         reader_main_menu = Menu(MenuNames.MAIN_MENU.value, [

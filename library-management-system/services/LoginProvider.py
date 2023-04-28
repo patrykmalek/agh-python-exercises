@@ -56,3 +56,6 @@ class LoginProvider:
         login = input("Login: ")
         password = input("Hasło: ")
         return login, password
+
+    def change_password(self):
+        print("Ta funkcjonalność nie została jeszcze wprowadzona")
