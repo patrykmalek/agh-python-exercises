@@ -19,8 +19,8 @@ Poniżej znajduje się lista funkcji, które powinny być dostępne w systemie:
 - Przeglądanie katalogu książek ✔
 - Wyszukiwanie książek po tytule, autorze lub słowach kluczowych ✔
 - Wypożyczanie książek ✔
-- Zwracanie książek
-- Przedłużanie wypożyczenia książek
+- Zwracanie książek ✔
+- Przedłużanie wypożyczenia książek ✔
 - Rezerwowanie już wypożyczonych książek przez innego czytelnika
 
 ### Dla bibliotekarza:
