@@ -7,7 +7,8 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788366428082",
@@ -17,7 +18,8 @@
     "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": true
+    "to_return": true,
+    "due_borrow_date": "2023-05-28"
   },
   {
     "isbn": "9788375108183",
@@ -27,7 +29,8 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788378398123",
@@ -37,7 +40,8 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788366723754",
@@ -47,7 +51,8 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788376860315",
@@ -57,7 +62,8 @@
     "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": true,
+    "due_borrow_date": "2023-06-11"
   },
   {
     "isbn": "9788375780677",
@@ -67,7 +73,8 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788324049903",
@@ -77,7 +84,8 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788328300048",
@@ -87,16 +95,18 @@
     "borrowed_by": null,
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": null
   },
   {
     "isbn": "9788378399123",
     "title": "Dzieci z bullerbyn",
     "author": "Astrid Lindgren",
-    "is_borrowed": false,
-    "borrowed_by": null,
+    "is_borrowed": true,
+    "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
     "is_reserved": false,
     "reserved_by": null,
-    "to_return": false
+    "to_return": false,
+    "due_borrow_date": "2023-06-04"
   }
 ]

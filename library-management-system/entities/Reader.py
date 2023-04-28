@@ -19,7 +19,12 @@ class Reader(User):
     def return_book(self, book):
         for borrowed_book in self.borrowed_books:
             if borrowed_book.isbn == book.isbn:
-                borrowed_book.to_return = True
+                borrowed_book.to_return = book.to_return
+
+    def extend_due_borrow_date(self, book):
+        for borrowed_book in self.borrowed_books:
+            if borrowed_book.isbn == book.isbn:
+                borrowed_book.due_borrow_date = book.due_borrow_date
 
     def to_dict(self):
         reader_dict = super().to_dict()

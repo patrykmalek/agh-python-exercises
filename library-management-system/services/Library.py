@@ -79,7 +79,7 @@ class Library:
 
     def remove_book(self):
         book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.REMOVE_BOOK.value,
-                                                 "Wybierz książkę lub wyszukaj:")
+                                                 MenuNames.CHOOSE_BOOK.value)
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         if self.book_repository.remove_book(selected_book):
@@ -90,7 +90,7 @@ class Library:
     def borrow_book(self):
         current_reader = self.library_management_system.session.current_user
         book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.BORROW_BOOK.value,
-                                                 "Wyszukaj i wypożycz:")
+                                                 MenuNames.CHOOSE_BOOK.value)
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         print(f'Wybrana książka: {selected_book}\n')
@@ -101,18 +101,40 @@ class Library:
                 current_reader.borrow_book(selected_book)
                 self.book_repository.update_book(selected_book)
                 self.user_repository.update_user(current_reader)
-                print(Messages.BORROW_SUCCESSFUL.value)
-            elif not borrow_successful and selected_book.borrowed_by.user_id != current_reader.user_id:
+                print(f'{Messages.BORROW_SUCCESSFUL.value} {selected_book.due_borrow_date}')
+            elif not borrow_successful and \
+                    (selected_book.is_borrowed and selected_book.borrowed_by.user_id != current_reader.user_id):
                 print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
+            elif not borrow_successful and \
+                    (selected_book.is_reserved and selected_book.reserved_by.user_id != current_reader.user_id):
+                print(Messages.BOOK_ALREADY_RESERVED_BY_SM_EL.value)
             else:
                 print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
+
+    def extend_due_borrow_date(self):
+        current_reader = self.library_management_system.session.get_current_user()
+        if current_reader.role == UserRole.READER:
+            borrowed_books = SearchFilter.filter_borrowed_books_without_return_mark(current_reader.borrowed_books)
+            book_menu = self.create_menu_for_objects(borrowed_books, MenuNames.EXTEND_DUE_BORROW_DATE_BOOK.value,
+                                                     MenuNames.CHOOSE_BOOK.value)
+            selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
+            CommonFunction.clear_view()
+            print(f'Wybrana książka: {selected_book}\n')
+            option = input(Messages.BOOK_EXTEND_DUE_BORROW_DATE_CONFIRM.value)
+            if option.lower() == "y":
+                extend_due_successful = selected_book.extend_due_borrow_date(current_reader)
+                if extend_due_successful:
+                    current_reader.extend_due_borrow_date(selected_book)
+                    self.book_repository.update_book(selected_book)
+                    self.user_repository.update_user(current_reader)
+                    print(f'{Messages.BOOK_AFTER_EXTEND_DUE_BORROW_DATE_INFO.value} {selected_book.due_borrow_date}')
 
     def return_book(self):
         current_reader = self.library_management_system.session.get_current_user()
         if current_reader.role == UserRole.READER:
             borrowed_books = SearchFilter.filter_borrowed_books_without_return_mark(current_reader.borrowed_books)
-            book_menu = self.create_menu_for_objects(borrowed_books, MenuNames.REMOVE_BOOK.value,
-                                             "Wybierz książkę do zwrotu lub wyszukaj:")
+            book_menu = self.create_menu_for_objects(borrowed_books, MenuNames.RETURN_BOOK.value,
+                                                     MenuNames.CHOOSE_BOOK.value)
             selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
             CommonFunction.clear_view()
             print(f'Wybrana książka: {selected_book}\n')
@@ -128,7 +150,7 @@ class Library:
     def accept_return_book(self):
         awaiting_to_return_books = self.get_awaiting_to_return_books()
         book_menu = self.create_menu_for_objects(awaiting_to_return_books, MenuNames.REMOVE_BOOK.value,
-                                                 "Wybierz książkę lub wyszukaj:")
+                                                 MenuNames.CHOOSE_BOOK.value)
         selected_book = book_menu.execute_menu_and_get_object(SearchFilter.filter_books_by_title_and_author)
         CommonFunction.clear_view()
         # TODO: find book in self.books, change some values and save in self.books

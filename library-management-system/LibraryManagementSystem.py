@@ -77,7 +77,8 @@ class LibraryManagementSystem:
             Option("Wyświetl książki do zwrotu", self.library.display_reader_with_return_mark_books),
             Option("Wyszukaj książkę", self.library.search_book),
             Option("Wypożycz książkę", self.library.borrow_book),
-            Option("Zwróć książkę", self.library.return_book)
+            Option("Zwróć książkę", self.library.return_book),
+            Option("Przedłuż wypożyczenie książki", self.library.extend_due_borrow_date),
         ])
 
         settings_management = Menu(MenuNames.READERS_MANAGEMENT.value, [
