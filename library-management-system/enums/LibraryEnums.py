@@ -9,6 +9,8 @@ class MenuNames(Enum):
     ALL_BOOKS = "Wszystkie książki"
     BORROWED_BOOKS = "Wypożyczone książki"
     RESERVED_BOOKS = "Zarezerwowane książki"
+    READER_BORROWED_BOOKS = "Twoje wypożyczone książki"
+    READER_RESERVED_BOOKS = "Twoje zarezerwowane książki"
     ADD_BOOK = "Dodawanie książki"
     REMOVE_BOOK = "Usuwanie książki"
     SEARCH_BOOK = "Wyszukiwanie książki"

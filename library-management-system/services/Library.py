@@ -1,3 +1,4 @@
+from enums.UserRole import UserRole
 from utils.CommonFunction import CommonFunction
 from utils.SearchFilter import SearchFilter
 from enums.LibraryEnums import MenuNames, Messages
@@ -35,6 +36,18 @@ class Library:
 
     def display_reserved_books(self):
         self.display_books(self.book_repository.get_reserved_books(), MenuNames.RESERVED_BOOKS.value)
+
+    def display_reader_borrowed_books(self):
+        current_user = self.library_management_system.session.get_current_user()
+        if current_user.role == UserRole.READER:
+            books_to_display = current_user.borrowed_books
+            self.display_books(books_to_display, MenuNames.READER_BORROWED_BOOKS.value)
+
+    def display_reader_reserved_books(self):
+        current_user = self.library_management_system.session.get_current_user()
+        if current_user.role == UserRole.READER:
+            books_to_display = current_user.reserved_books
+            self.display_books(books_to_display, MenuNames.READER_RESERVED_BOOKS.value)
 
     def search_book(self):
         book_menu = self.create_menu_for_objects(self.book_repository.get_books(), MenuNames.SEARCH_BOOK.value,
