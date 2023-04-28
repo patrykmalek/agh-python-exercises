@@ -1,1 +1,102 @@
-[{"isbn": "9788378399328", "title": "Harry Potter and the Philosopher's Stone", "author": "J.K. Rowling", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788366428082", "title": "The Lord of the Rings", "author": "J.R.R. Tolkien", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788375108183", "title": "Gra o tron", "author": "George R.R. Martin", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788378398123", "title": "Dziewczyna z poci\u0105gu", "author": "Paula Hawkins", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788366723754", "title": "W\u0142adca much", "author": "William Golding", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788376860315", "title": "S\u0142ownik j\u0119zyka polskiego", "author": "PWN", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788375780677", "title": "Czysty kod. Podr\u0119cznik dobrego programisty", "author": "Robert C. Martin", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788324049903", "title": "PHP i MySQL. Tworzenie stron WWW. Vademecum profesjonalisty", "author": "Luke Welling, Laura Thomson", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788328300048", "title": "Hobbit", "author": "J.R.R. Tolkien", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}, {"isbn": "9788378399123", "title": "Dzieci z bullerbyn", "author": "Astrid Lindgren", "is_borrowed": false, "borrowed_by": null, "is_reserved": false, "reserved_by": null, "to_return": false}]
+[
+  {
+    "isbn": "9788378399328",
+    "title": "Harry Potter and the Philosopher's Stone",
+    "author": "J.K. Rowling",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788366428082",
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "is_borrowed": true,
+    "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788375108183",
+    "title": "Gra o tron",
+    "author": "George R.R. Martin",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788378398123",
+    "title": "Dziewczyna z poci\u0105gu",
+    "author": "Paula Hawkins",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788366723754",
+    "title": "W\u0142adca much",
+    "author": "William Golding",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788376860315",
+    "title": "S\u0142ownik j\u0119zyka polskiego",
+    "author": "PWN",
+    "is_borrowed": true,
+    "borrowed_by": "2a878b79-bb65-4227-8db3-77be2facbfe8",
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788375780677",
+    "title": "Czysty kod. Podr\u0119cznik dobrego programisty",
+    "author": "Robert C. Martin",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788324049903",
+    "title": "PHP i MySQL. Tworzenie stron WWW. Vademecum profesjonalisty",
+    "author": "Luke Welling, Laura Thomson",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788328300048",
+    "title": "Hobbit",
+    "author": "J.R.R. Tolkien",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  },
+  {
+    "isbn": "9788378399123",
+    "title": "Dzieci z bullerbyn",
+    "author": "Astrid Lindgren",
+    "is_borrowed": false,
+    "borrowed_by": null,
+    "is_reserved": false,
+    "reserved_by": null,
+    "to_return": false
+  }
+]

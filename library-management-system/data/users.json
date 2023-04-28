@@ -16,7 +16,10 @@
     "family_name": "Kowalski",
     "role": "reader",
     "library_card_number": "LIB-0002",
-    "borrowed_books": [],
+    "borrowed_books": [
+      "9788376860315",
+      "9788366428082"
+    ],
     "reserved_books": []
   },
   {

@@ -18,6 +18,9 @@ class Library:
         self.books_file = books_file
         self.library_management_system = None
 
+        self.user_repository.add_links_to_book(self.book_repository)
+        self.book_repository.add_links_to_reader(self.user_repository)
+
     def display_books(self, books_to_display=None, message=MenuNames.ALL_BOOKS.value):
         print(CommonFunction.create_bordered_string(message))
         if books_to_display is None:
@@ -80,7 +83,7 @@ class Library:
                 self.book_repository.update_book(selected_book)
                 self.user_repository.update_user(current_reader)
                 print(Messages.BORROW_SUCCESSFUL.value)
-            elif not borrow_successful and selected_book.borrowed_by != current_reader:
+            elif not borrow_successful and selected_book.borrowed_by.user_id != current_reader.user_id:
                 print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
             else:
                 print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
@@ -102,7 +105,6 @@ class Library:
     #             print(Messages.BOOK_ALREADY_BORROWED_BY_SM_EL.value)
     #         else:
     #             print(Messages.BOOK_ALREADY_BORROWED_BY_USER.value)
-
 
     def accept_return_book(self):
         awaiting_to_return_books = self.get_awaiting_to_return_books()

@@ -3,7 +3,6 @@ from entities.Book import Book
 from utils.SearchFilter import SearchFilter
 import os
 import json
-from repositories.UserRepository import UserRepository
 
 
 class BookRepository:
@@ -49,23 +48,24 @@ class BookRepository:
         self.save_books()
 
     def load_books(self):
-        user_repository = UserRepository()
         if not os.path.getsize(self.books_file) == 0:
             with open(self.books_file, 'r', encoding='utf-8') as file:
                 books_dict_list = json.load(file)
             for book_dict in books_dict_list:
-                book = Book.from_dict(book_dict)
-                borrowed_by = None
-                reserved_by = None
-                borrowed_by_id = book_dict.get("borrowed_by")
-                if borrowed_by_id is not None:
-                    borrowed_by = user_repository.get_reader_by_id(borrowed_by_id)
-                reserved_by_id = book_dict.get("reserved_by")
-                if reserved_by_id is not None:
-                    reserved_by = user_repository.get_reader_by_id(reserved_by_id)
-                book.borrowed_by = borrowed_by
-                book.reserved_by = reserved_by
-                self.books.append(book)
+                self.books.append(Book.from_dict(book_dict))
+
+    def add_links_to_reader(self, user_repository):
+        for book in self.books:
+            borrowed_by = None
+            reserved_by = None
+            borrowed_by_id = book.borrowed_by
+            if borrowed_by_id is not None:
+                borrowed_by = user_repository.get_reader_by_id(borrowed_by_id)
+            reserved_by_id = book.reserved_by
+            if reserved_by_id is not None:
+                reserved_by = user_repository.get_reader_by_id(reserved_by_id)
+            book.borrowed_by = borrowed_by
+            book.reserved_by = reserved_by
 
     def save_books(self):
         books_dict_list = []

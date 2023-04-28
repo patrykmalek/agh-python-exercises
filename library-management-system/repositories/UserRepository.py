@@ -20,7 +20,6 @@ class UserRepository:
         self.users = []
         self.readers = []
         self.librarians = []
-
         self.load_users()
         self.load_readers()
         self.load_librarians()
@@ -69,6 +68,21 @@ class UserRepository:
         for user_data in self.users:
             if user_data['role'] == 'librarian':
                 self.librarians.append(Librarian.from_dict(user_data))
+
+    def add_links_to_book(self, book_repository):
+        for reader in self.readers:
+            borrowed_books = reader.borrowed_books
+            reserved_books = reader.reserved_books
+            reader.borrowed_books = []
+            reader.reserved_books = []
+            for book_isbn in borrowed_books:
+                book = book_repository.get_book_by_isbn(book_isbn)
+                if book:
+                    reader.borrowed_books.append(book)
+            for book_isbn in reserved_books:
+                book = book_repository.get_book_by_isbn(book_isbn)
+                if book:
+                    reader.reserved_books.append(book)
 
     def get_user_by_login(self, login):
         readers_dict = {reader.login: reader for reader in self.readers}
