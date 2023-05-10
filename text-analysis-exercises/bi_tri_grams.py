@@ -4,9 +4,10 @@ import re
 def count_bigrams_and_trigrams(filename):
     bigram_counts = {}
     trigram_counts = {}
+
     with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
-            line = re.sub(r'[^\w\s]', '', line)
+            line = re.sub(r'[^\w\s]|_', ' ', line)
             line = line.lower()
 
             words = line.split()
