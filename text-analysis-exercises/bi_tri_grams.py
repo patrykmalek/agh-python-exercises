@@ -6,26 +6,26 @@ def count_bigrams_and_trigrams(filename):
     trigram_counts = {}
 
     with open(filename, 'r', encoding='utf-8') as file:
-        for line in file:
-            line = re.sub(r'[^\w\s]|_', ' ', line)
-            line = line.lower()
+        file_content = file.read()
+        file_content = re.sub(r'[^\w\s]|_', ' ', file_content)
+        file_content = file_content.lower()
 
-            words = line.split()
-            # bigrams, utworzenie bigramu, każde dwa następne słowa tworzą bigram
-            for i, word in enumerate(words[:-1]):  # do przedostatniego słowa
-                bigram = f'{word} {words[i + 1]}'
-                if bigram in bigram_counts:
-                    bigram_counts[bigram] += 1
-                else:
-                    bigram_counts[bigram] = 1
+        words = file_content.split()
+        # bigrams, utworzenie bigramu, każde dwa następne słowa tworzą bigram
+        for i, word in enumerate(words[:-1]):  # do przedostatniego słowa
+            bigram = f'{word} {words[i + 1]}'
+            if bigram in bigram_counts:
+                bigram_counts[bigram] += 1
+            else:
+                bigram_counts[bigram] = 1
 
-            # trigrams
-            for i, word in enumerate(words[:-2]):  # do przed przedostatniego słowa
-                trigram = f'{word} {words[i + 1]} {words[i + 2]}'
-                if trigram in trigram_counts:
-                    trigram_counts[trigram] += 1
-                else:
-                    trigram_counts[trigram] = 1
+        # trigrams
+        for i, word in enumerate(words[:-2]):  # do przed przedostatniego słowa
+            trigram = f'{word} {words[i + 1]} {words[i + 2]}'
+            if trigram in trigram_counts:
+                trigram_counts[trigram] += 1
+            else:
+                trigram_counts[trigram] = 1
     sorted_bigram_counts_list = sorted(bigram_counts.items(), key=lambda x: (-x[1], x[0]))
     sorted_trigram_counts_list = sorted(trigram_counts.items(), key=lambda x: (-x[1], x[0]))
     sorted_bigram_counts_dict = {bigram: count for bigram, count in sorted_bigram_counts_list}
