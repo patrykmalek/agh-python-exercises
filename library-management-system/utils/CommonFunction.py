@@ -14,6 +14,7 @@ class CommonFunction:
         remaining_length = remaining_length - len(left_fill)
         right_fill = fill_char * remaining_length
         return f"{left_fill}{text}{right_fill}"
+        return "{:^60}".format(text)
 
     @staticmethod
     def clear_view():

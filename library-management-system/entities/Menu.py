@@ -1,7 +1,8 @@
-from .Option import Option, OptionMenu
-from utils.CommonFunction import CommonFunction
 from enums.LibraryEnums import MenuNames, Messages
 from enums.UserRole import UserRole
+from utils.CommonFunction import CommonFunction
+
+from .Option import Option, OptionMenu
 
 
 class Menu:

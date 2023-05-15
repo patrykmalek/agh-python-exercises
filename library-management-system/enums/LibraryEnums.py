@@ -1,8 +1,9 @@
 from enum import Enum
+
 from utils.CommonFunction import CommonFunction
 
 
-class MenuNames(Enum):
+class MenuNames(Enum):  # to nie powinien być enum
     MAIN_MENU = "Główne menu"
     BOOKS_MANAGEMENT = "Zarządzanie książkami"
     READERS_MANAGEMENT = "Zarządzanie czytelnikami"
@@ -27,7 +28,7 @@ class MenuNames(Enum):
     EXIT = "Wyjdź"
 
 
-class Messages(Enum):
+class Messages(Enum):  # jw.
     WELCOME = CommonFunction.create_bordered_string("Witaj w bibliotece!", length=100, fill_char=" ") + "\n" + \
               CommonFunction.create_bordered_string("System stworzony do obsługi biblioteki na potrzeby laboratorium "
                                                     "na uczelni AGH", length=100, fill_char=" ") + "\n" + \

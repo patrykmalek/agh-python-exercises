@@ -5,9 +5,12 @@
 System ma być obsługiwany przez konsolę, a tam, gdzie to możliwe, powinno być dostępne konsolowe, interaktywne menu.
 
 - Możliwość logowania jako czytelnik lub bibliotekarz.
-- Czytelnik powinien mieć możliwość wypożyczenia książki, zarezerwowania wypożyczonej książki, przedłużenia wypożyczenia oraz przeglądania katalogu (wyszukiwanie po tytule, autorze lub słowach kluczowych).
-- Bibliotekarz powinien mieć możliwość przyjęcia zwrotu książki, dodania nowej książki, usunięcia książki z systemu, dodania czytelnika.
-- System powinien przechowywać swoje dane na dysku — zmiany dokonane podczas jednego uruchomienia programu mają być widoczne w kolejnych.
+- Czytelnik powinien mieć możliwość wypożyczenia książki, zarezerwowania wypożyczonej książki, przedłużenia wypożyczenia
+  oraz przeglądania katalogu (wyszukiwanie po tytule, autorze lub słowach kluczowych).
+- Bibliotekarz powinien mieć możliwość przyjęcia zwrotu książki, dodania nowej książki, usunięcia książki z systemu,
+  dodania czytelnika.
+- System powinien przechowywać swoje dane na dysku — zmiany dokonane podczas jednego uruchomienia programu mają być
+  widoczne w kolejnych.
 
 ## Wymagane funkcje
 
@@ -34,7 +37,8 @@ Poniżej znajduje się lista funkcji, które powinny być dostępne w systemie:
 
 ## Przechowywanie danych
 
-Dane powinny być przechowywane w plikach tekstowych na dysku w strukturze, która umożliwi łatwe wyszukiwanie, dodawanie i usuwanie danych.
+Dane powinny być przechowywane w plikach tekstowych na dysku w strukturze, która umożliwi łatwe wyszukiwanie, dodawanie
+i usuwanie danych.
 np. pliki tekstowe, CSV lub JSON
 
 ## Uruchamianie systemu
@@ -45,5 +49,5 @@ np. pliki tekstowe, CSV lub JSON
 
 #### Polecenie:
 
-Aby uruchomić system należy sklonować repozytorium z kodem źródłowym, 
+Aby uruchomić system należy sklonować repozytorium z kodem źródłowym,
 przejść do katalogu z projektem i uruchomić projekt poleceniem `python LibraryManagmentSystem.py`

@@ -1,4 +1,4 @@
-class SearchFilter:
+class SearchFilter:  # po co klasa, skoro ma tylko statyczne metody?
     def __init__(self):
         pass
 

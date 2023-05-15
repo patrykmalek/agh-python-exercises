@@ -1,14 +1,15 @@
+import time
+
 from entities.Menu import Menu
 from entities.Option import Option, OptionMenu
 from enums.LibraryEnums import MenuNames, Messages
 from enums.UserRole import UserRole
+from repositories.BookRepository import BookRepository
+from repositories.UserRepository import UserRepository
 from services.Library import Library
 from services.LoginProvider import LoginProvider
 from services.Session import Session
 from utils.CommonFunction import CommonFunction
-from repositories.UserRepository import UserRepository
-from repositories.BookRepository import BookRepository
-import time
 
 
 class LibraryManagementSystem:
@@ -91,6 +92,7 @@ class LibraryManagementSystem:
         ])
 
         return reader_main_menu
+
 
 """
 URUCHOMIENIE PROGRAMU
