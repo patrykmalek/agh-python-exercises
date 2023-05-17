@@ -6,7 +6,7 @@ def count_bigrams_and_trigrams(filename):
     trigram_counts = {}
 
     with open(filename, 'r', encoding='utf-8') as file:
-        file_content = file.read()
+        file_content = file.read()  # zły pomysł; proszę to zrobić z Wikipedią
         file_content = re.sub(r'[^\w\s]|_', ' ', file_content)
         file_content = file_content.lower()
 
@@ -20,7 +20,7 @@ def count_bigrams_and_trigrams(filename):
                 bigram_counts[bigram] = 1
 
         # trigrams
-        for i, word in enumerate(words[:-2]):  # do przed przedostatniego słowa
+        for i, word in enumerate(words[:-2]):  # do przed przedostatniego słowa  # szkoda, że w poleceniu nie było n-gramów od 2 do 10
             trigram = f'{word} {words[i + 1]} {words[i + 2]}'
             if trigram in trigram_counts:
                 trigram_counts[trigram] += 1

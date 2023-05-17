@@ -2,8 +2,8 @@ import re
 
 
 def count_words(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
-        word_counts = {}
+    with open(filename, 'r', encoding='utf-8') as file:  # przesłonięcie symbolu wbudowanego
+        word_counts = {}  # collections.Counter
         # czytanie linia po linii
         for line in file:
             # wyczyszczenie linii ze wszystkich znaków, które nie są literą,
@@ -28,7 +28,7 @@ def count_words(filename):
 
 def display_n_most_common_words(sorted_words, n):
     words_and_counts_tuples = list(sorted_words.items())
-    for i, (word, count) in enumerate(words_and_counts_tuples):
+    for i, (word, count) in enumerate(words_and_counts_tuples):  # można start=1
         if i >= n and count != words_and_counts_tuples[i - 1][1]:
             break
         print(f'{i + 1}. {word}: {count}')

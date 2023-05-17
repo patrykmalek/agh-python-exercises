@@ -1,5 +1,6 @@
-from .User import User
 from enums.UserRole import UserRole
+
+from .User import User
 
 
 class Librarian(User):

@@ -78,7 +78,8 @@ class Book:
             'reserved_by': self.reserved_by.user_id if self.reserved_by else None,
             'to_return': self.to_return,
             'due_borrow_date': self.due_borrow_date.strftime('%Y-%m-%d') if self.due_borrow_date else None,
-            'due_reservation_date': self.due_reservation_date.strftime('%Y-%m-%d') if self.due_reservation_date else None
+            'due_reservation_date': self.due_reservation_date.strftime(
+                '%Y-%m-%d') if self.due_reservation_date else None
         }
 
     @staticmethod
