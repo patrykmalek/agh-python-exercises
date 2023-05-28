@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+
 class KnnClassifier:
     def __init__(self, k, distance_type):
         self.k = k
@@ -103,6 +104,7 @@ class KnnClassifier:
 
         return distances
 
+
 # Ściąga funkcji odleglości:
 # euclidean -> funkcja euklidesowa
 # taxi -> funkcja taksówkowa
@@ -115,7 +117,6 @@ k_neighbor = 3
 distance_function = "euclidean"
 
 x_test_vectors = [[82.18524265650146, 78.41780024806185, 35.10949458470073, 30.03053626819411]]
-
 
 knn = KnnClassifier(k_neighbor, distance_function)
 data = pd.read_csv(f'data/{dataset_file}', header=None, delimiter=" ")
@@ -133,4 +134,3 @@ for pred, test in zip(predicted, x_test_vectors):
     print("Predicted:", pred)
     print("Test Vector:", test)
     print("---")
-
