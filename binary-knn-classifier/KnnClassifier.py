@@ -22,6 +22,7 @@ class KnnClassifier:
     def predict(self, x):
         if self.x_train is None or self.y_train is None:
             print("Klasyfikator nie został jeszcze wytrenowany")
+            return
 
         if self.distance_type == 'euclidean':
             distances = self.euclidean_distance(x)
@@ -33,6 +34,7 @@ class KnnClassifier:
             distances = self.cosinus_distance(x)
         else:
             print("Błędne określenie funkcji odległości")
+            return
 
         y_predicted = []
         for element in distances:
@@ -43,7 +45,7 @@ class KnnClassifier:
             predicted_label = unique_labels[np.argmax(label_counts)]
             y_predicted.append(predicted_label)
 
-        return np.array(y_predicted)
+        return y_predicted
 
     # sqrt((x2 - x1)^2 + (y2 - y1)^2) odległość w linii prostej między dwoma punktami
     def euclidean_distance(self, x_test):
@@ -86,3 +88,35 @@ class KnnClassifier:
             distances[i] = max_abs_diff
 
         return distances
+
+
+# Ściąga funkcji odleglości:
+# euclidean -> funkcja euklidesowa
+# taxi -> funkcja taksówkowa
+# max -> funkcja maximum
+
+
+knn = KnnClassifier(3, "euclidean")
+
+
+x_test = [[0, 0, 0],
+          [2, 2, 2],
+          [3, 1, 4],
+          [1, 2, 3]]
+
+x_train = [[1, 1, 1],
+           [0, 1, 2],
+           [4, 3, 2],
+           [2, 2, 2]]
+
+y_train = [0, 0, 1, 1]
+
+knn.train(x_train, y_train)
+predicted = knn.predict(x_test)
+
+for pred, test in zip(predicted, x_test):
+    print("Predicted:", pred)
+    print("Test Vector:", test)
+    print("---")
+
+
