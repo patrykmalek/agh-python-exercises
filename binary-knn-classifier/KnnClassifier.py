@@ -87,11 +87,27 @@ class KnnClassifier:
 
         return distances
 
+    # iloczyn skalarny obu wektorów podzielony przez iloczyn ich rozmiarów,
+    # jeśli dobrze rozumiem, ze źródła: https://tinyurl.com/metrykakosinusowa
+    def cosinus_distance(self, x_test):
+        x_test = np.array(x_test)
+        num_train = self.x_train.shape[0]
+        num_test = x_test.shape[0]
+        distances = np.zeros((num_test, num_train))
+
+        for i in range(num_test):
+            dot_product = np.dot(self.x_train, x_test[i])
+            vector_length_a = np.linalg.norm(self.x_train, axis=1)
+            vector_length_b = np.linalg.norm(x_test[i])
+            distances[i] = 1 - (dot_product / (vector_length_a * vector_length_b))
+
+        return distances
 
 # Ściąga funkcji odleglości:
 # euclidean -> funkcja euklidesowa
 # taxi -> funkcja taksówkowa
 # max -> funkcja maximum
+# cos -> funkcja cosinusowa
 
 
 knn = KnnClassifier(3, "euclidean")
