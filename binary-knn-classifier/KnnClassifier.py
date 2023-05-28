@@ -1,5 +1,5 @@
 import numpy as np
-
+import pandas as pd
 
 class KnnClassifier:
     def __init__(self, k, distance_type):
@@ -110,27 +110,27 @@ class KnnClassifier:
 # cos -> funkcja cosinusowa
 
 
-knn = KnnClassifier(3, "euclidean")
+dataset_file = "dataset2.csv"
+k_neighbor = 3
+distance_function = "euclidean"
+
+x_test_vectors = [[82.18524265650146, 78.41780024806185, 35.10949458470073, 30.03053626819411]]
 
 
-x_test = [[0, 0, 0],
-          [2, 2, 2],
-          [3, 1, 4],
-          [1, 2, 3]]
+knn = KnnClassifier(k_neighbor, distance_function)
+data = pd.read_csv(f'data/{dataset_file}', header=None, delimiter=" ")
 
-x_train = [[1, 1, 1],
-           [0, 1, 2],
-           [4, 3, 2],
-           [2, 2, 2]]
+x_train = data.iloc[:, :-1].values
+y_train = data.iloc[:, -1].values
 
-y_train = [0, 0, 1, 1]
-
+# TRAIN
 knn.train(x_train, y_train)
-predicted = knn.predict(x_test)
 
-for pred, test in zip(predicted, x_test):
+# PREDICTED
+predicted = knn.predict(x_test_vectors)
+
+for pred, test in zip(predicted, x_test_vectors):
     print("Predicted:", pred)
     print("Test Vector:", test)
     print("---")
-
 
