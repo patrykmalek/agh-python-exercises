@@ -23,13 +23,13 @@ class KnnClassifier:
         if self.x_train is None or self.y_train is None:
             print("Klasyfikator nie został jeszcze wytrenowany")
 
-        if self.distance == 'euclidean':
+        if self.distance_type == 'euclidean':
             distances = self.euclidean_distance(x)
-        elif self.distance == 'taxi':
+        elif self.distance_type == 'taxi':
             distances = self.taxi_distance(x)
-        elif self.distance == 'max':
+        elif self.distance_type == 'max':
             distances = self.maximum_distance(x)
-        elif self.distance == 'cos':
+        elif self.distance_type == 'cos':
             distances = self.cosinus_distance(x)
         else:
             print("Błędne określenie funkcji odległości")
