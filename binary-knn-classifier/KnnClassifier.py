@@ -72,3 +72,17 @@ class KnnClassifier:
             distances[i] = sum_abs_diff
 
         return distances
+
+    # max(|x2 - x1|, |y2 - y1|)
+    def maximum_distance(self, x_test):
+        x_test = np.array(x_test)
+        num_train = self.x_train.shape[0]
+        num_test = x_test.shape[0]
+        distances = np.zeros((num_test, num_train))
+
+        for i in range(num_test):
+            abs_diff = np.abs(self.x_train - x_test[i])
+            max_abs_diff = np.max(abs_diff, axis=1)
+            distances[i] = max_abs_diff
+
+        return distances
