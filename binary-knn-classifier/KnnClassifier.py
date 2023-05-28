@@ -21,8 +21,7 @@ class KnnClassifier:
 
     def predict(self, x):
         if self.x_train is None or self.y_train is None:
-            print("Klasyfikator nie został jeszcze wytrenowany")
-            return
+            raise Exception("Klasyfikator nie został jeszcze wytrenowany")
 
         if self.distance_type == 'euclidean':
             distances = self.euclidean_distance(x)
@@ -33,8 +32,7 @@ class KnnClassifier:
         elif self.distance_type == 'cos':
             distances = self.cosinus_distance(x)
         else:
-            print("Błędne określenie funkcji odległości")
-            return
+            raise Exception("Błędne określenie funkcji odległości")
 
         y_predicted = []
         for element in distances:
