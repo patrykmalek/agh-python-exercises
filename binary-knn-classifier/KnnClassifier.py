@@ -22,9 +22,9 @@ class KnnClassifier:
 
     def predict(self, x):
         if self.x_train is None or self.y_train is None:
-            raise Exception("Klasyfikator nie został jeszcze wytrenowany")
+            raise Exception("Klasyfikator nie został jeszcze wytrenowany")  # nie wolno rzucać Exception - zbyt szeroki typ
 
-        if self.distance_type == 'euclidean':
+        if self.distance_type == 'euclidean':  # a czemu to jest string, a nie już funkcja?
             distances = self.euclidean_distance(x)
         elif self.distance_type == 'taxi':
             distances = self.taxi_distance(x)
@@ -33,7 +33,7 @@ class KnnClassifier:
         elif self.distance_type == 'cos':
             distances = self.cosinus_distance(x)
         else:
-            raise Exception("Błędne określenie funkcji odległości")
+            raise Exception("Błędne określenie funkcji odległości")  # jw.
 
         y_predicted = []
         for element in distances:
@@ -53,7 +53,7 @@ class KnnClassifier:
         num_test = x_test.shape[0]
         distances = np.zeros((num_test, num_train))
 
-        for i in range(num_test):
+        for i in range(num_test):  # bardzo niewydajne
             squared_diff = np.square(self.x_train - x_test[i])
             sum_squared_diff = np.sum(squared_diff, axis=1)
             distances[i] = np.sqrt(sum_squared_diff)
@@ -62,7 +62,7 @@ class KnnClassifier:
 
     # |x2 - x1| + |y2 - y1|
     def taxi_distance(self, x_test):
-        x_test = np.array(x_test)
+        x_test = np.array(x_test)  # ten kod się powtarza we wszystkich odległościach
         num_train = self.x_train.shape[0]
         num_test = x_test.shape[0]
         distances = np.zeros((num_test, num_train))
